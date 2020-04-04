@@ -1,0 +1,24 @@
+{
+  "name": "passman",
+  "version": "1.0.0",
+  "description": "## Description",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcstang/passMan.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcstang/passMan/issues"
+  },
+  "homepage": "https://github.com/jcstang/passMan#readme",
+  "dependencies": {
+    "bulma": "^0.8.1",
+    "bulma-start": "0.0.3"
+  }
+}
