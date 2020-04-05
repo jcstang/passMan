@@ -29,11 +29,14 @@ module.exports = function(app) {
     // =============================================================
     app.post("/api/users/new", (req, res) => {
         db.User.create({
-            // TODO: finish this
-            
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            user_name: req.body.user_name,
+            email: req.body.email
         }).then((dbResults) => {
-            // TODO: finish this
-            
+            res.status(201).json({
+                id: dbResults.dataValues.id
+            });
         }).catch(() => {
             res.status(406).send({
                 error: 'something blew up'
