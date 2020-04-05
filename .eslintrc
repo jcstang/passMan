@@ -1,0 +1,28 @@
+{
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-console": 1,
+        "no-extra-boolean-cast": 0,
+        "no-useless-escape": 1
+    },
+    "globals": {
+        "__dirname": false,
+        "require": false,
+        "describe": false,
+        "it": false,
+        "beforeEach": false,
+        "afterEach": false,
+        "module": false,
+        "console": false,
+        "global": false,
+        "Symbol": false,
+        "signet": false,
+        "window": false,
+        "process": false,
+        "chooseReporter": false
+    }
+}
