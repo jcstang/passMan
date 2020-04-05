@@ -25,6 +25,7 @@ app.use(express.static("public"));
 // Routes
 // =============================================================
 require("./routes/html-routes.js")(app);
+require("./routes/password-routes.js")(app);
 
 
 // Syncing our sequelize models and then starting our express app
