@@ -19,15 +19,16 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
-    // Passwords.associate = function (models) {
-    //     // We're saying that a Post should belong to an Author
-    //     // A Post can't be created without an Author due to the foreign key constraint
+    // Passwords.associate = (models) => {
     //     Passwords.belongsTo(models.User, {
     //         foreignKey: {
-    //             allowNull: false
+    //             allowNull: false,
+    //             foreignKey: "id",
+    //             as: "Password"
     //         }
     //     });
     // };
+
 
     return Passwords;
 };
