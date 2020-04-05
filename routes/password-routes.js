@@ -31,11 +31,10 @@ module.exports = function (app) {
             password: req.body.password,
             ownerKey: req.body.ownerKey
         }).then((dbResults) => {
-            console.log("here is some new results: ");
-            console.log(dbResults);
-            console.log(dbResults.dataValues.id);
-            // res.end("hi");
-            res.json(dbResults.dataValues.id);
+            res.status(201).json({ id: dbResults.dataValues.id });
+        }).catch(() => {
+            console.log('im here at catch!!!!!!!!');
+            res.status(406).send({ error: 'something blew up' });
         });
     });
     // Add a chirp
