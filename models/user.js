@@ -1,8 +1,7 @@
 module.exports = function (sequelize, DataTypes) {
     var User = sequelize.define("Author", {
         // Giving the Author model a name of type STRING
-        first_name: DataTypes.STRING,
-        last_name: DataTypes.STRING
+        name: DataTypes.STRING
     });
 
     User.associate = function (models) {
