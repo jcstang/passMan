@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    var User = sequelize.define("Author", {
+    var User = sequelize.define("User", {
         // Giving the Author model a name of type STRING
         first_name: {
             type: DataTypes.STRING,
@@ -11,14 +11,30 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1]
             }
         },
-        userName: {
+        user_name: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 len: [1]
             }
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            validate: {
+                len: [1]
+            }
         }
+    }, {
+        timestamps: false
     });
+
+    User.associate = function(models) {
+        User.hasMany(models.Passwords, {
+            onDelete: "cascade",
+            foreignKey: "ownerKey"
+        })
+    };
 
     // User.associate = function (models) {
     //     // Associating Author with Posts
