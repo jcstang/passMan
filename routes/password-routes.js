@@ -31,7 +31,7 @@ module.exports = function (app) {
 
     // POST
     // =============================================================
-    app.post("/api/passwords/new", (req, res) => {
+    app.post("/api/passwords", (req, res) => {
         db.Passwords.create({
             description: req.body.description,
             userName: req.body.userName,
@@ -41,9 +41,10 @@ module.exports = function (app) {
             res.status(201).json({
                 id: dbResults.dataValues.id
             });
-        }).catch(() => {
+        }).catch((err) => {
             res.status(406).send({
-                error: 'something blew up'
+                message: 'something blew up ',
+                error: err 
             });
         });
     });

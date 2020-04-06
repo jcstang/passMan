@@ -1,30 +1,39 @@
-$(document).ready(function() {
-    
-    var newPassword = {
-        description: "coooooolthing",
-        userName: "blah@something.com",
-        password: "ILikePIe"
-    };
+$(document).ready(function () {
+    console.log('jquery loaded.');
 
-    $.post("/api/passwords/new", newPassword)
-        .then(function(results) {
-            console.log(results);
-            
+    // var newPassword = {
+    //     description: "password Thingy",
+    //     userName: "blah@something.com",
+    //     password: "ILikePIe",
+    //     ownerKey: 3
+    // };
+
+    let newUser = {
+        first_name: "Peter",
+        last_name: "Quill",
+        user_name: "starlord227",
+        email: "coolguy@nova.com"
+    }
+
+    $.post("/api/users/new", newUser)
+        .then(function (data, status) {
+            // success
+            console.log(`success, new id: ${data.id}`);  
+        }).catch((err) => {
+            // error
+            console.log('error man');
         });
 
-    // // Send an AJAX POST-request with jQuery
-    // $.post("/api/new", newChirp)
-    //     // On success, run the following code
-    //     .then(function () {
+    // $.post("/api/users/new", newUser, function(data, status) {
 
-    //         var row = $("<div>");
-    //         row.addClass("chirp");
+    // });
 
-    //         row.append("<p>" + newChirp.author + " chirped: </p>");
-    //         row.append("<p>" + newChirp.body + "</p>");
-    //         row.append("<p>At " + moment(newChirp.created_at).format("h:mma on dddd") + "</p>");
 
-    //         $("#chirp-area").prepend(row);
+    function displayMessage(msgType) {
+        // TODO: add some sort of cool dropdown status
+        // TODO: make the message go away
+        console.log(msgType);
+    }
 
-    //     });
+    console.log('end of jquery file.')
 });
