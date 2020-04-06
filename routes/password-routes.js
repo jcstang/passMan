@@ -31,7 +31,7 @@ module.exports = function (app) {
 
     // POST
     // =============================================================
-    app.post("/api/passwords/new", (req, res) => {
+    app.post("/api/passwords", (req, res) => {
         db.Passwords.create({
             description: req.body.description,
             userName: req.body.userName,
