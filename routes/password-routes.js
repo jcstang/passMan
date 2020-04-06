@@ -41,9 +41,10 @@ module.exports = function (app) {
             res.status(201).json({
                 id: dbResults.dataValues.id
             });
-        }).catch(() => {
+        }).catch((err) => {
             res.status(406).send({
-                error: 'something blew up'
+                message: 'something blew up ',
+                error: err 
             });
         });
     });

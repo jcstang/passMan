@@ -1,7 +1,7 @@
 $(document).ready(function() {
     
     var newPassword = {
-        description: "coooooolthing",
+        description: "password Thingy",
         userName: "blah@something.com",
         password: "ILikePIe"
     };
