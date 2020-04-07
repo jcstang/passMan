@@ -26,16 +26,6 @@ module.exports = function (sequelize, DataTypes) {
         });
     };
 
-    // Passwords.associate = (models) => {
-    //     Passwords.belongsTo(models.User, {
-    //         foreignKey: {
-    //             allowNull: false,
-    //             foreignKey: "id",
-    //             as: "Password"
-    //         }
-    //     });
-    // };
-
 
     return Passwords;
 };
