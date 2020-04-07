@@ -63,7 +63,7 @@ module.exports = function (app) {
 
     // DELETE
     // =============================================================
-    app.get("/api/users/:id", (req, res) => {
+    app.delete("/api/users/:id", (req, res) => {
         db.User.destroy({
             where: {
                 id: req.params.id
