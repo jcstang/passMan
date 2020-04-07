@@ -3,6 +3,8 @@
 // ***************************************************************************
 // ** Dependencies **
 const express = require("express");
+const debug = require("debug")('server');
+const morgan = require('morgan');
 
 
 // sets up the express app
@@ -10,8 +12,11 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-const db = require("./models");
+// const db = require("./models");
+// const db = require("./models/user");
+let db = require("./models");
 
+app.use(morgan('dev'));
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -23,6 +28,10 @@ app.use(express.static("public"));
 // Routes
 // =============================================================
 require("./routes/html-routes.js")(app);
+require("./routes/password-routes.js")(app);
+require("./routes/user-routes.js")(app);
+
+
 
 
 // Syncing our sequelize models and then starting our express app
@@ -30,5 +39,11 @@ require("./routes/html-routes.js")(app);
 db.sequelize.sync({ force: true }).then(function() {
     app.listen(PORT, function() {
         console.log("App listening on PORT " + PORT);
+        debug('server.js listening on port: ' + PORT);
     });
 });
+// app.listen(PORT, function() {
+//     console.log("app listening on PORT " + PORT);
+//     debug('hello!');
+    
+// });
