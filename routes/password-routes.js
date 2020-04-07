@@ -57,7 +57,8 @@ module.exports = function (app) {
                 where: {
                     id: req.body.id
                 }
-            }).then((dbPassword) => {
+            }).then((dbPassword, error) => {
+            console.log(error);
             res.json(dbPassword);
         }).catch(() => {
             res.status(500).send({
