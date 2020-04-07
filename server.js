@@ -2,6 +2,7 @@
 // Server.js - passMAN | the password manager for all
 // ***************************************************************************
 // ** Dependencies **
+const path = require('path');
 const express = require("express");
 const debug = require("debug")('server');
 const morgan = require('morgan');
@@ -24,8 +25,8 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // Static Directory
-app.use(express.static("public"));
-
+// app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 // =============================================================
