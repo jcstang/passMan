@@ -1,3 +1,8 @@
+// ***************************************************************************
+// home.js - this file is for js running on the client page
+// ***************************************************************************
+
+
 $(document).ready(function () {
     console.log('jquery loaded.');
 
@@ -16,17 +21,15 @@ $(document).ready(function () {
     }
 
     $.post("/api/users/new", newUser)
-        .then(function (data, status) {
+        .then(function (data) {
             // success
-            console.log(`success, new id: ${data.id}`);  
-        }).catch((err) => {
+            console.log(`success, new id: ${data.id}`);
+            displayMessage('success');  
+        }).catch(() => {
             // error
             console.log('error man');
+            displayMessage('error');
         });
-
-    // $.post("/api/users/new", newUser, function(data, status) {
-
-    // });
 
 
     function displayMessage(msgType) {

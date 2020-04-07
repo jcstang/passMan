@@ -44,7 +44,7 @@ module.exports = function (app) {
         }).catch((err) => {
             res.status(406).send({
                 message: 'something blew up ',
-                error: err 
+                error: err
             });
         });
     });
@@ -58,12 +58,12 @@ module.exports = function (app) {
                     id: req.body.id
                 }
             }).then((dbPassword) => {
-                res.json(dbPassword);
-            }).catch(() => {
-                res.status(500).send({
-                    error: "idk, something blew up"
-                });
+            res.json(dbPassword);
+        }).catch(() => {
+            res.status(500).send({
+                error: "idk, something blew up"
             });
+        });
     });
 
     // DELETE
@@ -74,10 +74,14 @@ module.exports = function (app) {
                 id: req.params.id
             }
         }).then((isSuccess) => {
-            if(isSuccess) {
-                res.status(202).send({ message: "success" });
+            if (isSuccess) {
+                res.status(202).send({
+                    message: "success"
+                });
             } else {
-                res.status(404).send({ message: "cannot do... no findy wut you needy."});
+                res.status(404).send({
+                    message: "cannot do... no findy wut you needy."
+                });
             }
         }).catch(() => {
             res.status(500).send({
