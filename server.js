@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 8080;
 
 // TODO: implement PASSPORT.JS
 // TODO: come up with more todos for that
+// Jacob S. is working on this currently. 
 
 
 // brings in database models

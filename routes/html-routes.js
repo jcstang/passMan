@@ -7,11 +7,12 @@ const passport = require('passport');
 
 module.exports = function (app) {
     
-    // app.get('/', (req, res) => {
-    //     // res.sendFile(path.join(__dirname, "../public/home.html"));
-    //     res.end('no');
-    //     // TODO: render main.handlebars
-    // });
+    // TODO: protect this page behind login/passport
+    app.get('/', (req, res) => {
+        res.sendFile(path.join(__dirname, "../public/home.html"));
+        // res.end('no');
+        // TODO: render main.handlebars
+    });
 
     app.get('/main', (req, res) => {
         res.sendFile(path.join(__dirname, "../public/home.html"));
@@ -28,4 +29,9 @@ module.exports = function (app) {
         });
 
 
+    // TODO: signup route, with adding to mysql
+    app.post('/signUp',(req, res) => {
+        console.log(req.body);
+        res.json(req.body);
+    });
 }

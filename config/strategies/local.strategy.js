@@ -2,6 +2,7 @@ const passport = require('passport');
 const {
     Strategy
 } = require('passport-local');
+const db = require('../../models');
 
 module.exports = function localStrategy() {
 
@@ -22,7 +23,7 @@ module.exports = function localStrategy() {
     // example from passport js site. 
     passport.use(new Strategy(
         function (username, password, done) {
-            User.findOne({
+            db.User.findOne({
                 username: username
             }, function (err, user) {
                 if (err) {
