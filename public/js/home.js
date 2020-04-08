@@ -3,7 +3,6 @@
 // home.js - this file is for js running on the client page
 // ***************************************************************************
 
-
 $(document).ready(function () {
     console.log('jquery loaded.');
 
@@ -67,7 +66,31 @@ $(document).ready(function () {
         // TODO: add some sort of cool dropdown status
         // TODO: make the message go away
         console.log(msgType);
+
+        if(msgType === 'success') {
+            addSuccessMessage('card-message', 'Saved! See you CAN do things.');
+        }
     }
 
     console.log('end of jquery file.')
 });
+
+
+// ***************************************************************************
+// helper functions
+// ***************************************************************************
+
+function addSuccessMessage(htmlClass, message) {
+    let successMessage = $('<div>').addClass('alert alert-success')
+        .attr('role', 'alert')
+        .text(message);
+    $(`.${htmlClass}`).prepend(successMessage);
+
+    setTimeOutOn(htmlClass, 5);
+}
+
+function setTimeOutOn(htmlClass, seconds) {
+    setTimeout(function () {
+        $(`.${htmlClass}`).detach();
+    }, seconds * 1000);
+}
