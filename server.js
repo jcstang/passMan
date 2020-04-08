@@ -36,14 +36,14 @@ require("./routes/user-routes.js")(app);
 
 // Syncing our sequelize models and then starting our express app
 // =============================================================
-db.sequelize.sync({ force: true }).then(function() {
-    app.listen(PORT, function() {
-        console.log("App listening on PORT " + PORT);
-        debug('server.js listening on port: ' + PORT);
-    });
-});
-// app.listen(PORT, function() {
-//     console.log("app listening on PORT " + PORT);
-//     debug('hello!');
-    
+// db.sequelize.sync({ force: true }).then(function() {
+//     app.listen(PORT, function() {
+//         console.log("App listening on PORT " + PORT);
+//         debug('server.js listening on port: ' + PORT);
+//     });
 // });
+app.listen(PORT, function() {
+    console.log("app listening on PORT " + PORT);
+    debug('hello!');
+    
+});

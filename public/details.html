@@ -28,14 +28,23 @@
       <!-- main content -->
       <div class="container">
 
-        <!-- put form here -->
-        <!-- password description -->
-        <!-- username -->
-        <!-- password -->
-        <!-- save button -->
-        <!-- exit button -->
-        <!-- hello-->
-
+        <form>
+          <div class="form-group">
+            <label for="passwordDescription">Password Description</label>
+            <input type="text" class="form-control" id="passwordDescription" aria-describedby="emailHelp">
+          </div>
+          <div class="form-group">
+            <label for="inputUsername">Username</label>
+            <input type="text" class="form-control" id="inputUsername" aria-describedby="emailHelp">
+            <small id="usernameHelp" class="form-text text-muted">We'll never share your username with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password">
+          </div>
+          <button type="submit" class="btn btn-primary" id="submit">Save</button>
+          <button type="exit" class="btn btn-primary" id="exit">Exit</button>
+        </form>
       </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
