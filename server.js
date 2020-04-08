@@ -6,8 +6,6 @@ const path = require('path');
 const express = require("express");
 const debug = require("debug")('server');
 const morgan = require('morgan');
-const htmlRoutes = require("./routes/html-routes.js");
-const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
@@ -40,8 +38,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 // =============================================================
-app.use('/', htmlRoutes);
-// require("./routes/html-routes.js")(app);
+// app.use('/', htmlRoutes);
+require("./routes/html-routes.js")(app);
 require("./routes/password-routes.js")(app);
 require("./routes/user-routes.js")(app);
 
