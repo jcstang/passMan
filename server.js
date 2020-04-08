@@ -6,8 +6,6 @@ const path = require('path');
 const express = require("express");
 const debug = require("debug")('server');
 const morgan = require('morgan');
-const htmlRoutes = require("./routes/html-routes.js");
-const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
@@ -18,6 +16,7 @@ const PORT = process.env.PORT || 8080;
 
 // TODO: implement PASSPORT.JS
 // TODO: come up with more todos for that
+// Jacob S. is working on this currently. 
 
 
 // brings in database models
@@ -40,8 +39,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 // =============================================================
-app.use('/', htmlRoutes);
-// require("./routes/html-routes.js")(app);
+// app.use('/', htmlRoutes);
+require("./routes/html-routes.js")(app);
 require("./routes/password-routes.js")(app);
 require("./routes/user-routes.js")(app);
 
