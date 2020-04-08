@@ -13,8 +13,25 @@ module.exports = function (app) {
         db.Passwords.findAll({})
             .then(function (dbPassword) {
                 res.json(dbPassword);
+                // TODO: handlebars ready
+                // TODO: res.render stuff
+                // TODO: also pass it handlebars formatted data from dbPassword
+                // See below
             });
     });
+
+    // cat example
+    // =============================================================
+    // Create all our routes and set up logic within those routes where required.
+    // router.get("/", function (req, res) {
+    //     cat.all(function (data) {
+    //         var hbsObject = {
+    //             cats: data
+    //         };
+    //         console.log(hbsObject);
+    //         res.render("index", hbsObject);
+    //     });
+    // });
 
     // GET - by id
     // =============================================================
@@ -26,6 +43,7 @@ module.exports = function (app) {
             })
             .then(function (dbPassword) {
                 res.json(dbPassword);
+                // future thing to do is make this handlebars ready
             });
     });
 

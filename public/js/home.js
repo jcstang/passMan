@@ -14,6 +14,15 @@ $(document).ready(function () {
     //     ownerKey: 3
     // };
 
+    // listen for edit button
+    // on click of update button {
+        // $.put("api/passwords", {
+	//"id": 1
+	//"description": "updated description text"
+//})
+
+    //}
+
     let newUser = {
         first_name: "Peter",
         last_name: "Quill",
@@ -21,7 +30,7 @@ $(document).ready(function () {
         email: "coolguy@nova.com"
     };
 
-    
+    // /api/users?q=joe
     $.post("/api/users/new", newUser)
     .then(function (data) {
         // success

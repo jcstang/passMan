@@ -20,11 +20,17 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
     res.sendFile( path.join(__dirname, "../public/home.html") );
+    // TODO: render main.handlebars
+    
 });
 
 router.get("/details", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/details.html"));
+
 });
+
+// TODO: add a login page with login.handlebars
+
 
 
 // EXPORTS

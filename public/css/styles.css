@@ -3,6 +3,6 @@
     height: 100px;
 }
 .navbar{
-    background-image: url(/public/img/purty_wood_@2X.png);
+    background-image: url("../img/purty_wood_@2X.png");
     background-color: black;
 }
