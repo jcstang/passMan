@@ -1,7 +1,7 @@
 let db = require("../models");
 
-module.exports = function(app) {
-    
+module.exports = function (app) {
+
     // GET - all
     // =============================================================
     app.get("/api/users", (req, res) => {
@@ -16,13 +16,13 @@ module.exports = function(app) {
     // =============================================================
     app.get("/api/users/:id", (req, res) => {
         db.User.findOne({
-            where: {
-                id: req.params.id
-            }
-        })
-        .then((dbUser) => {
-            res.json(dbUser)
-        });
+                where: {
+                    id: req.params.id
+                }
+            })
+            .then((dbUser) => {
+                res.json(dbUser)
+            });
     });
 
     // POST
@@ -63,18 +63,22 @@ module.exports = function(app) {
 
     // DELETE
     // =============================================================
-    app.get("/api/users/:id", (req, res) => {
+    app.delete("/api/users/:id", (req, res) => {
         db.User.destroy({
             where: {
                 id: req.params.id
             }
         }).then((isSuccess) => {
-            if(isSuccess) {
-                res.status(202).send({ message: "success" });
+            if (isSuccess) {
+                res.status(202).send({
+                    message: "success"
+                });
             } else {
-                res.status(404).send({ message: "cannot do... no findy wut you needy."});
+                res.status(404).send({
+                    message: "cannot do... no findy wut you needy."
+                });
             }
         });
-    })
+    });
 
 };

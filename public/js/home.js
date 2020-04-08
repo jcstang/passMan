@@ -1,3 +1,9 @@
+/* eslint-disable no-undef */
+// ***************************************************************************
+// home.js - this file is for js running on the client page
+// ***************************************************************************
+
+
 $(document).ready(function () {
     console.log('jquery loaded.');
 
@@ -8,27 +14,55 @@ $(document).ready(function () {
     //     ownerKey: 3
     // };
 
+    // listen for edit button
+    // on click of update button {
+        // $.put("api/passwords", {
+	//"id": 1
+	//"description": "updated description text"
+//})
+
+    //}
+
     let newUser = {
         first_name: "Peter",
         last_name: "Quill",
         user_name: "starlord227",
         email: "coolguy@nova.com"
-    }
+    };
 
+    // /api/users?q=joe
     $.post("/api/users/new", newUser)
-        .then(function (data, status) {
-            // success
-            console.log(`success, new id: ${data.id}`);  
-        }).catch((err) => {
-            // error
-            console.log('error man');
-        });
+    .then(function (data) {
+        // success
+        console.log(`success, new id: ${data.id}`);
+        displayMessage('success');  
+        let newPassword = {
+            description: 'facebooks',
+            userName: 'starlord',
+            password: 'password123',
+            ownerKey: data.id
+        };
 
-    // $.post("/api/users/new", newUser, function(data, status) {
+        insertPassword(newPassword);
 
-    // });
+    }).catch(() => {
+        // error
+        console.log('error man');
+        displayMessage('error');
+    });
 
-
+    function insertPassword(passedData) {
+        $.post("/api/passwords", passedData)
+            .then((data) => {
+                console.log(`success, new id: ${data.id}`);
+                displayMessage('success');
+            }).catch(() => {
+                console.log('error man');
+                displayMessage('error');
+            });
+    }
+    
+    
     function displayMessage(msgType) {
         // TODO: add some sort of cool dropdown status
         // TODO: make the message go away

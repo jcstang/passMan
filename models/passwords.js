@@ -17,6 +17,8 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             len: [1]
         }
+        // TODO: add a website field
+        
     });
 
     Passwords.associate = (models) => {
@@ -25,16 +27,6 @@ module.exports = function (sequelize, DataTypes) {
             foreignKey: "id"
         });
     };
-
-    // Passwords.associate = (models) => {
-    //     Passwords.belongsTo(models.User, {
-    //         foreignKey: {
-    //             allowNull: false,
-    //             foreignKey: "id",
-    //             as: "Password"
-    //         }
-    //     });
-    // };
 
 
     return Passwords;

@@ -3,16 +3,49 @@
 // ***************************************************************************
 
 const path = require('path');
+const express = require('express');
+const router = express.Router();
 
 
-module.exports = function(app) {
+// const app = express();
+// // is below needed here?
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
 
-    app.get("/", (req, res) => {
-        res.sendFile( path.join(__dirname, "../public/home.html") );
-    });
+// router.use(function timeLog(req, res, next) {
+//     // let printDate = chalk( Date().toString() );
+//     console.log( 'html-routes Time: ', Date().toString() );
+//     next();
+// });
 
-    app.get("/details", (req, res) => {
-        res.sendFile(path.join(__dirname, "../public/details.html"));
-    })
+router.get("/", (req, res) => {
+    res.sendFile( path.join(__dirname, "../public/home.html") );
+    // TODO: render main.handlebars
+    
+});
 
-};
+router.get("/details", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/details.html"));
+
+});
+
+// TODO: add a login page with login.handlebars
+
+
+
+// EXPORTS
+// =============================================================
+module.exports = router;
+
+
+// module.exports = function(app) {
+
+//     app.get("/", (req, res) => {
+//         res.sendFile( path.join(__dirname, "../public/home.html") );
+//     });
+
+//     app.get("/details", (req, res) => {
+//         res.sendFile(path.join(__dirname, "../public/details.html"));
+//     })
+
+// };

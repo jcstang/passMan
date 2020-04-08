@@ -13,8 +13,25 @@ module.exports = function (app) {
         db.Passwords.findAll({})
             .then(function (dbPassword) {
                 res.json(dbPassword);
+                // TODO: handlebars ready
+                // TODO: res.render stuff
+                // TODO: also pass it handlebars formatted data from dbPassword
+                // See below
             });
     });
+
+    // cat example
+    // =============================================================
+    // Create all our routes and set up logic within those routes where required.
+    // router.get("/", function (req, res) {
+    //     cat.all(function (data) {
+    //         var hbsObject = {
+    //             cats: data
+    //         };
+    //         console.log(hbsObject);
+    //         res.render("index", hbsObject);
+    //     });
+    // });
 
     // GET - by id
     // =============================================================
@@ -26,6 +43,7 @@ module.exports = function (app) {
             })
             .then(function (dbPassword) {
                 res.json(dbPassword);
+                // future thing to do is make this handlebars ready
             });
     });
 
@@ -44,7 +62,7 @@ module.exports = function (app) {
         }).catch((err) => {
             res.status(406).send({
                 message: 'something blew up ',
-                error: err 
+                error: err
             });
         });
     });
@@ -57,13 +75,14 @@ module.exports = function (app) {
                 where: {
                     id: req.body.id
                 }
-            }).then((dbPassword) => {
-                res.json(dbPassword);
-            }).catch(() => {
-                res.status(500).send({
-                    error: "idk, something blew up"
-                });
+            }).then((dbPassword, error) => {
+            console.log(error);
+            res.json(dbPassword);
+        }).catch(() => {
+            res.status(500).send({
+                error: "idk, something blew up"
             });
+        });
     });
 
     // DELETE
@@ -74,10 +93,14 @@ module.exports = function (app) {
                 id: req.params.id
             }
         }).then((isSuccess) => {
-            if(isSuccess) {
-                res.status(202).send({ message: "success" });
+            if (isSuccess) {
+                res.status(202).send({
+                    message: "success"
+                });
             } else {
-                res.status(404).send({ message: "cannot do... no findy wut you needy."});
+                res.status(404).send({
+                    message: "cannot do... no findy wut you needy."
+                });
             }
         }).catch(() => {
             res.status(500).send({
