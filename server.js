@@ -14,6 +14,10 @@ const htmlRoutes = require("./routes/html-routes.js");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+// TODO: implement PASSPORT.JS
+// TODO: come up with more todos for that
+
+
 // brings in database models
 let db = require("./models");
 
@@ -36,6 +40,10 @@ require("./routes/password-routes.js")(app);
 require("./routes/user-routes.js")(app);
 
 
+// TODO: set the template engine to handlebars
+// TODO: npm installs and such. requires and such.
+// TODO: specifiy the default layout handlebars should use
+
 
 
 // Syncing our sequelize models and then starting our express app
@@ -44,7 +52,8 @@ db.sequelize.sync({
     force: true
 }).then(function () {
     app.listen(PORT, function () {
-        debug('server.js listening on port: ' + PORT);
+        // debug('server.js listening on port: ' + PORT);
+        debug(`server.js listening on port: ${PORT}`);
     });
 });
 // app.listen(PORT, function() {
