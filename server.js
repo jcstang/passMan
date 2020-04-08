@@ -7,7 +7,9 @@ const express = require("express");
 const debug = require("debug")('server');
 const morgan = require('morgan');
 const htmlRoutes = require("./routes/html-routes.js");
-
+const passport = require('passport');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 // sets up the express app
 // =============================================================
@@ -27,6 +29,10 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(session({ secret: 'new new york'}));
+
+require('./config/passport.js')(app);
 
 // Static Directory
 // app.use(express.static("public"));
