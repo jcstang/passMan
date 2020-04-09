@@ -12,7 +12,7 @@ const session = require('express-session');
 // sets up the express app
 // =============================================================
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8181;
 
 // TODO: implement PASSPORT.JS
 // TODO: come up with more todos for that
@@ -66,3 +66,5 @@ db.sequelize.sync({
 //     debug('hello!');
 
 // });
+
+module.exports = app;
