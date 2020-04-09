@@ -41,7 +41,18 @@ module.exports = function (app) {
     });
 
     app.get('/login', (req, res) => {
-        res.render("login-register");
+        let routeText = {
+            name: "login"
+        }
+        res.render("login-register", routeText);
+    });
+
+    app.get('/signup', (req, res) => {
+        let routeText = {
+            name: "signup"
+        }
+
+        res.render("login-register", routeText);
     });
     
 
