@@ -48,11 +48,8 @@ module.exports = function (app) {
     });
 
     // POST
-    // FIXME: problem: post failing, outcome: we want the post to succeed
-    // TODO: Jacob Stanger will work on this one. 
     // =============================================================
     app.post("/api/passwords", (req, res) => {
-        console.log(req.body);
         db.Passwords.create({
             description: req.body.description,
             userName: req.body.userName,
@@ -71,8 +68,6 @@ module.exports = function (app) {
     });
 
     // PUT
-    // FIXME: problem: post failing, outcome: we want the post to succeed
-    // TODO: Jacob Stanger will work on this one. 
     // =============================================================
     app.put("/api/passwords", (req, res) => {
         db.Passwords.update(
@@ -81,7 +76,7 @@ module.exports = function (app) {
                     id: req.body.id
                 }
             }).then((dbPassword, error) => {
-            console.log(error);
+            // console.log(error);
             res.json(dbPassword);
         }).catch(() => {
             res.status(500).send({
