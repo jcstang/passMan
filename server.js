@@ -48,6 +48,12 @@ require("./routes/user-routes.js")(app);
 // TODO: set the template engine to handlebars
 // TODO: npm installs and such. requires and such.
 // TODO: specifiy the default layout handlebars should use
+// Set Handlebars.
+let expressHandlebars = require("express-handlebars");
+
+app.engine("handlebars", expressHandlebars({defaultLayout: "main"}));
+app.set("view engine", "handlebars");
+
 //Below is a link for partials setup
 //https://stackoverflow.com/questions/16385173/node-js-express-handlebars-js-partial-views
 
