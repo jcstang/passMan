@@ -81,4 +81,9 @@ module.exports = function (app) {
         });
     });
 
+
+    function isANumber(value) {
+        return (typeof value === 'number');
+    }
+
 };
