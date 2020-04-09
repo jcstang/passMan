@@ -15,9 +15,11 @@ module.exports = function (app) {
     });
 
     app.get('/main', (req, res) => {
-        res.sendFile(path.join(__dirname, "../public/home.html"));
+        res.sendFile(path.join(__dirname, "../public/main.html"));
         // TODO: render main.handlebars
     });
+    
+
     
     // TODO: add a login page with login.handlebars
     app.post('/login',

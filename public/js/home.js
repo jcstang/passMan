@@ -50,28 +50,18 @@ $(document).ready(function () {
         displayMessage('error');
     });
 
-    function insertPassword(passedData) {
-        $.post("/api/passwords", passedData)
-            .then((data) => {
-                console.log(`success, new id: ${data.id}`);
-                displayMessage('success');
-            }).catch(() => {
-                console.log('error man');
-                displayMessage('error');
-            });
-    }
     
     
     function displayMessage(msgType) {
         // TODO: add some sort of cool dropdown status
         // TODO: make the message go away
         console.log(msgType);
-
+        
         if(msgType === 'success') {
             addSuccessMessage('card-message', 'Saved! See you CAN do things.');
         }
     }
-
+    
     console.log('end of jquery file.')
 });
 
@@ -82,10 +72,10 @@ $(document).ready(function () {
 
 function addSuccessMessage(htmlClass, message) {
     let successMessage = $('<div>').addClass('alert alert-success')
-        .attr('role', 'alert')
-        .text(message);
+    .attr('role', 'alert')
+    .text(message);
     $(`.${htmlClass}`).prepend(successMessage);
-
+    
     setTimeOutOn(htmlClass, 5);
 }
 
@@ -93,4 +83,15 @@ function setTimeOutOn(htmlClass, seconds) {
     setTimeout(function () {
         $(`.${htmlClass}`).detach();
     }, seconds * 1000);
+}
+
+function insertPassword(passedData) {
+    $.post("/api/passwords", passedData)
+        .then((data) => {
+            console.log(`success, new id: ${data.id}`);
+            displayMessage('success');
+        }).catch(() => {
+            console.log('error man');
+            displayMessage('error');
+        });
 }
