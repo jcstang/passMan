@@ -2,7 +2,25 @@
 
 ## Description
 
-Wanted to build a tool to keep track of things like passwords, notes, software license numbers, and gift ideas? User login and simliar to a password manager. 
+Wanted to build a tool to keep track of things like passwords, notes, software license numbers, and gift ideas? User login and simliar to a password manager.
+
+Password manager, that lets you login or signup and manage your passwords.
+
+## Tech stack
+* Node JS
+* Express
+* Handlebars
+* Passport JS
+* Jquery
+* Javascript, html, css
+* MYSQL
+* ESLint
+* Mocha and Chai
+* Sequelize
+
+## Flow
+
+![screenshot](public/img/app-auth-flow.png)
 
 ## trying to replicate a great example below
 
