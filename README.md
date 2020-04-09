@@ -18,6 +18,10 @@ Password manager, that lets you login or signup and manage your passwords.
 * Mocha and Chai
 * Sequelize
 
+## Flow
+
+![screenshot](public/img/app-auth-flow.png)
+
 ## trying to replicate a great example below
 
 ![stronghold logo](img/stronghold+logo+left.png)
