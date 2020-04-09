@@ -24,7 +24,7 @@ module.exports = function (sequelize, DataTypes) {
     Passwords.associate = (models) => {
         Passwords.belongsTo(models.User, {
             allowNull: false,
-            foreignKey: "id"
+            foreignKey: "ownerKey"
         });
     };
 
