@@ -12,7 +12,7 @@ const session = require('express-session');
 // sets up the express app
 // =============================================================
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8181;
 
 // TODO: implement PASSPORT.JS
 // TODO: come up with more todos for that
@@ -48,6 +48,8 @@ require("./routes/user-routes.js")(app);
 // TODO: set the template engine to handlebars
 // TODO: npm installs and such. requires and such.
 // TODO: specifiy the default layout handlebars should use
+//Below is a link for partials setup
+//https://stackoverflow.com/questions/16385173/node-js-express-handlebars-js-partial-views
 
 
 
@@ -66,3 +68,5 @@ db.sequelize.sync({
 //     debug('hello!');
 
 // });
+
+module.exports = app;
