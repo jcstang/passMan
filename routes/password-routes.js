@@ -55,6 +55,7 @@ module.exports = function (app) {
     // TODO: Jacob Stanger will work on this one. 
     // =============================================================
     app.post("/api/passwords", (req, res) => {
+        console.log(req.body);
         db.Passwords.create({
             description: req.body.description,
             userName: req.body.userName,
@@ -65,7 +66,7 @@ module.exports = function (app) {
                 id: dbResults.dataValues.id
             });
         }).catch((err) => {
-            res.status(406).send({
+            res.status(406).json({
                 message: 'something blew up ',
                 error: err
             });

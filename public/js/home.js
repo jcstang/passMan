@@ -42,6 +42,7 @@ $(document).ready(function () {
             ownerKey: data.id
         };
 
+        console.log(newPassword);
         insertPassword(newPassword);
 
     }).catch(() => {
@@ -49,6 +50,17 @@ $(document).ready(function () {
         console.log('error man');
         displayMessage('error');
     });
+
+    function insertPassword(passedData) {
+        $.post("/api/passwords", passedData)
+            .then((data) => {
+                console.log(`success, new id: ${data.id}`);
+                displayMessage('success');
+            }).catch(() => {
+                console.log('error man');
+                displayMessage('error');
+            });
+    }
 
     
     
@@ -85,13 +97,3 @@ function setTimeOutOn(htmlClass, seconds) {
     }, seconds * 1000);
 }
 
-function insertPassword(passedData) {
-    $.post("/api/passwords", passedData)
-        .then((data) => {
-            console.log(`success, new id: ${data.id}`);
-            displayMessage('success');
-        }).catch(() => {
-            console.log('error man');
-            displayMessage('error');
-        });
-}
