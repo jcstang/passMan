@@ -20,6 +20,7 @@
   "homepage": "https://github.com/jcstang/passMan#readme",
   "dependencies": {
     "bulma": "^0.8.1",
+    "chai-http": "^4.3.0",
     "cookie-parser": "^1.4.5",
     "debug": "^4.1.1",
     "express": "^4.17.1",
