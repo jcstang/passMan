@@ -78,13 +78,8 @@ module.exports = function (app) {
     // passport js
     // =============================================================
     app.post('/login', (req, res) => {
-        // create user here
-        // const { username, password } = req.body;
-        // debug(req.body);
-        // res.json(req);
-        console.log(req.body);
-        // res.end('hi');
 
+        // search for username in MySQL
         db.User.findOne({
             where: {
                 user_name: req.body.loginusername
@@ -100,11 +95,11 @@ module.exports = function (app) {
             }
 
             res.redirect('/welcome');
+        }).catch((err) => {
+            console.log(error);
+            res.redirect('/welcome');
         });
 
-        // req.login(req.body, ()=> {
-        //     res.redirect('/portal');
-        // });
     });
 
     app.get('/portal', (req, res) => {
@@ -112,7 +107,6 @@ module.exports = function (app) {
     });
 
 
-    // TODO: signup route, with adding to mysql
     app.post('/signUp',(req, res) => {
         console.log(req.body);
 
@@ -143,8 +137,5 @@ module.exports = function (app) {
             });
         });
 
-        // req.login(req.body, () => {
-        //     res.redirect('/portal');
-        // });
     });
 }
