@@ -28,7 +28,7 @@ module.exports = function (app) {
                 })
                 
             });
-            // console.log('######### thePasswords ############################');
+            console.log('######### thePasswords ############################');
             // console.log(thePasswords);
             // console.log('######### here is dbPasswords - original data ############################');
             // console.log(dbPasswords);
@@ -43,18 +43,22 @@ module.exports = function (app) {
 
 
     // TODO: form stuff
-    app.get('/login', (req, res) => {
-        let routeText = {
-            name: "login"
-        }
-        res.render("login-register", routeText);
-    });
+    // app.get('/login', (req, res) => {
+    //     let routeText = {
+    //         name: "login"
+    //     }
+    //     res.render("login-register", routeText);
+    // });
 
     app.get('/signup', (req, res) => {
         let routeText = {
             name: "signup"
         }
         res.render("login-register", routeText);
+    });
+
+    app.get('/welcome', (req, res) => {
+        res.render("welcome");
     });
     
 
@@ -76,11 +80,24 @@ module.exports = function (app) {
     app.post('/login', (req, res) => {
         // create user here
         // const { username, password } = req.body;
-        debug(req.body);
+        // debug(req.body);
+        // res.json(req);
+        console.log(req.body);
+        // res.end('hi');
 
-        req.login(req.body, ()=> {
-            res.redirect('/portal');
+        db.User.findOne({
+            where: {
+                user_name: req.body.loginusername
+            }
+        })
+        .then((dbUser) => {
+            res.json(dbUser);
+            // user is coming here!!!!!! yay!!!!!!
         });
+
+        // req.login(req.body, ()=> {
+        //     res.redirect('/portal');
+        // });
     });
 
     app.get('/portal', (req, res) => {
@@ -98,16 +115,20 @@ module.exports = function (app) {
         // });
 
         db.User.create({
-            first_name: 'Philip j.',
-            last_name: 'Fry',
+            first_name: req.body.firstname,
+            last_name: req.body.lastname,
             user_name: req.body.username,
-            password: req.body.password,
+            password: req.body.userpassword,
             email: req.body.email
+
         }).then((dbResults) => {
             // res.status(201).json({
             //     id: dbResults.dataValues.id
             // });
-            res.redirect('/portal');
+            res.status(201).json({
+                id: dbResults.dataValues.id
+            });
+            // res.redirect('/portal');
 
         }).catch(() => {
             res.status(406).send({
@@ -115,8 +136,8 @@ module.exports = function (app) {
             });
         });
 
-        req.login(req.body, () => {
-            res.redirect('/portal');
-        });
+        // req.login(req.body, () => {
+        //     res.redirect('/portal');
+        // });
     });
 }
