@@ -43,12 +43,12 @@ module.exports = function (app) {
 
 
     // TODO: form stuff
-    app.get('/login', (req, res) => {
-        let routeText = {
-            name: "login"
-        }
-        res.render("login-register", routeText);
-    });
+    // app.get('/login', (req, res) => {
+    //     let routeText = {
+    //         name: "login"
+    //     }
+    //     res.render("login-register", routeText);
+    // });
 
     app.get('/signup', (req, res) => {
         let routeText = {
