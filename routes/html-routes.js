@@ -80,11 +80,24 @@ module.exports = function (app) {
     app.post('/login', (req, res) => {
         // create user here
         // const { username, password } = req.body;
-        debug(req.body);
+        // debug(req.body);
+        // res.json(req);
+        console.log(req.body);
+        // res.end('hi');
 
-        req.login(req.body, ()=> {
-            res.redirect('/portal');
+        db.User.findOne({
+            where: {
+                user_name: req.body.loginusername
+            }
+        })
+        .then((dbUser) => {
+            res.json(dbUser);
+            // user is coming here!!!!!! yay!!!!!!
         });
+
+        // req.login(req.body, ()=> {
+        //     res.redirect('/portal');
+        // });
     });
 
     app.get('/portal', (req, res) => {
