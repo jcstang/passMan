@@ -91,8 +91,15 @@ module.exports = function (app) {
             }
         })
         .then((dbUser) => {
-            res.json(dbUser);
             // user is coming here!!!!!! yay!!!!!!
+            if(dbUser.password === req.body.loginpassword) {
+                // TODO: go to home page
+                // res.json(dbUser);
+                console.log(dbUser);
+                res.redirect('/');
+            }
+
+            res.redirect('/welcome');
         });
 
         // req.login(req.body, ()=> {
