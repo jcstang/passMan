@@ -90,23 +90,28 @@ module.exports = function (app) {
     app.post('/signUp',(req, res) => {
         console.log(req.body);
 
-        db.User.create({
-            first_name: 'Philip j.',
-            last_name: 'Fry',
-            user_name: req.body.username,
-            password: req.body.password,
-            email: req.body.email
-        }).then((dbResults) => {
-            // res.status(201).json({
-            //     id: dbResults.dataValues.id
-            // });
-            res.redirect('/portal');
-            
-        }).catch(() => {
-            res.status(406).send({
-                error: 'something blew up'
-            });
+        passport.authenticate('local', {
+            successRedirect: '/profile',
+            failureRedirect: 'google.com'
         });
+
+        // db.User.create({
+        //     first_name: 'Philip j.',
+        //     last_name: 'Fry',
+        //     user_name: req.body.username,
+        //     password: req.body.password,
+        //     email: req.body.email
+        // }).then((dbResults) => {
+        //     // res.status(201).json({
+        //     //     id: dbResults.dataValues.id
+        //     // });
+        //     res.redirect('/portal');
+
+        // }).catch(() => {
+        //     res.status(406).send({
+        //         error: 'something blew up'
+        //     });
+        // });
 
         // req.login(req.body, () => {
         //     res.redirect('/portal');
