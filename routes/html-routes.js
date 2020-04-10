@@ -44,9 +44,18 @@ module.exports = function (app) {
 
                 // === get passwords and render index passing in the data ====
                 db.Passwords.findAll({}).then(function(dbPasswords) {
+                    let passPasswords = [];
+                    dbPasswords.forEach(element => {
+                        passPasswords.push({
+                            description: element.description,
+                            username: element.userName,
+                            password: element.password
+                        });
+                    });
+                    
                     // DATA passing is working. I just refrenced {{username}} and handlebars picked it up
                     let thing = {
-                        passwords: dbPasswords,
+                        passwords: passPasswords,
                         username: dbUser.user_name
                     };
 
