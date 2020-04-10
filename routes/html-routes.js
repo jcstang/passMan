@@ -78,31 +78,43 @@ module.exports = function (app) {
     });
 
     app.post('/signUp',(req, res) => {
+        const passwordInput = req.body.userpassword;
+        console.log('##$%%$#@#$%$#');
+        console.log(passwordInput);
 
         bcrypt.genSalt(saltRounds, function(err, salt) {
-            bcrypt.hash(req.body.password, salt, function(err, hash) {
-                let userReadyForSave = {
-                    first_name: req.body.firstname,
-                    last_name: req.body.lastname,
-                    user_name: req.body.username,
-                    password: hash,
-                    email: req.body.email
-                };
+            bcrypt.hash(passwordInput, salt, function(err, hash) {
+                // console.log(err);
+                
+                    let userReadyForSave = {
+                        first_name: req.body.firstname,
+                        last_name: req.body.lastname,
+                        user_name: req.body.username,
+                        password: hash,
+                        email: req.body.email
+                    };
+    
+                    // create the user
+                    db.User.create(userReadyForSave)
+                        .then((dbCreatedUser) => {
+                        // res.status(201).json({
+                        //     id: dbResults.dataValues.id
+                        // });
+                        
 
-                // create the user
-                db.User.create(userReadyForSave)
-                    .then((dbResults) => {
-                    // res.status(201).json({
-                    //     id: dbResults.dataValues.id
-                    // });
-                    res.status(201).render("index", dbResults);
-        
-                })
-                .catch(() => {
-                    res.status(406).send({
-                        error: 'something blew up'
+                        // ============================================================
+                        // TODO: Pass the passwords here instead of dbResults
+                        res.status(201).render("index", dbCreatedUser);
+            
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        
+                        res.status(406).send({
+                            error: 'something blew up'
+                        });
                     });
-                });
+                
 
             });
         });
@@ -110,5 +122,5 @@ module.exports = function (app) {
 
     });
 
-    
+
 }
