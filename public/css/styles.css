@@ -5,3 +5,7 @@
 .navbar{
     background-image: url(/public/img/purty_wood_@2X.png);
 }
+
+html, body {
+    height: 100%;
+}
