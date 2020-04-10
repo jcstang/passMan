@@ -4,6 +4,7 @@
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const path = require('path');
+const helper = require('../helperFuncs');
 // brings in database models
 let db = require("../models");
 
@@ -37,40 +38,70 @@ module.exports = function (app) {
             // user is coming here!!!!!! yay!!!!!!
             console.log('===============');
             console.log(dbUser);
+            console.log(dbUser.password);
 
+            const passwordFromDB = dbUser.password;
+            const passwordFromInput = req.body.loginpassword;
 
-            if(dbUser.password === req.body.loginpassword) {
+            // Load hash from your password DB.
+            bcrypt.compare(passwordFromInput, passwordFromDB, function(err, result) {
+                // result == true
+                if(err) {
+                    //do stuff
+                    // res.redirect('/welcome');
+                }
 
-                // ***********************************************************
-                // ****** ASSUMPTION - there is only 1 user in the DB ********
-                // ***********************************************************
-                db.Passwords.findAll({}).then(function(dbPasswords) {
-                    let passPasswords = [];
-                    dbPasswords.forEach(element => {
-                        passPasswords.push({
-                            description: element.description,
-                            username: element.userName,
-                            password: element.password
-                        });
+                if(result === true) {
+                    db.Passwords.findAll({}).then(function(dbPasswords) {
+                        res.render("index", helper.createPasswordObject(dbPasswords, dbUser.userName));
+    
+                    }).catch((err) => {
+                        res.end(err);
                     });
+
+                } else {
+                    //no go bro
+                    // res.redirect('/welcome');
+                    res.end('hash didnt work??');
+                }
+
+            });
+
+
+            // if(dbUser.password === req.body.loginpassword) {
+
+            //     // ***********************************************************
+            //     // ****** ASSUMPTION - there is only 1 user in the DB ********
+            //     // ***********************************************************
+            //     db.Passwords.findAll({}).then(function(dbPasswords) {
+            //         let passPasswords = [];
+            //         dbPasswords.forEach(element => {
+            //             passPasswords.push({
+            //                 description: element.description,
+            //                 username: element.userName,
+            //                 password: element.password
+            //             });
+            //         });
                     
-                    // DATA passing is working. I just refrenced {{username}} and handlebars picked it up
-                    let thing = {
-                        passwords: passPasswords,
-                        username: dbUser.user_name  // this is the logged in username NOT a saved username/password
-                    };
+            //         // DATA passing is working. I just refrenced {{username}} and handlebars picked it up
+            //         let thing = {
+            //             passwords: passPasswords,
+            //             username: dbUser.user_name  // this is the logged in username NOT a saved username/password
+            //         };
 
-                    res.render("index", thing);
+            //         res.render("index", thing);
 
-                }).catch((err) => {
-                    res.end(err);
-                });
+            //     }).catch((err) => {
+            //         res.end(err);
+            //     });
 
-            } else {
-                // be careful with redirects. if bugs here look here.
-                res.redirect('/welcome');
-            }
+            // } else {
+            //     // be careful with redirects. if bugs here look here.
+            //     res.redirect('/welcome');
+            // }
 
+
+        // if db didn't find user
         }).catch(() => {
             res.redirect('/welcome');
         });
@@ -97,13 +128,8 @@ module.exports = function (app) {
                     // create the user
                     db.User.create(userReadyForSave)
                         .then((dbCreatedUser) => {
-                        // res.status(201).json({
-                        //     id: dbResults.dataValues.id
-                        // });
-                        
-
                         // ============================================================
-                        // TODO: Pass the passwords here instead of dbResults
+                        // TODO: Pass the passwords here instead of dbResults. how do we get passwords?
                         res.status(201).render("index", dbCreatedUser);
             
                     })
