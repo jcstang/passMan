@@ -29,7 +29,9 @@ app.use(express.urlencoded({
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(session({ secret: 'new new york'}));
+app.use(session({
+    secret: 'new new york'
+}));
 
 require('./config/passport.js')(app);
 
@@ -44,10 +46,13 @@ require("./routes/html-routes.js")(app);
 require("./routes/password-routes.js")(app);
 require("./routes/user-routes.js")(app);
 
+let expressHandlebars = require("express-handlebars");
 
-// TODO: set the template engine to handlebars
-// TODO: npm installs and such. requires and such.
-// TODO: specifiy the default layout handlebars should use
+app.engine("handlebars", expressHandlebars({
+    defaultLayout: "main"
+}));
+app.set("view engine", "handlebars");
+
 //Below is a link for partials setup
 //https://stackoverflow.com/questions/16385173/node-js-express-handlebars-js-partial-views
 
@@ -59,14 +64,9 @@ db.sequelize.sync({
     force: true
 }).then(function () {
     app.listen(PORT, function () {
-        // debug('server.js listening on port: ' + PORT);
         debug(`server.js listening on port: ${PORT}`);
     });
 });
-// app.listen(PORT, function() {
-//     console.log("app listening on PORT " + PORT);
-//     debug('hello!');
 
-// });
 
 module.exports = app;

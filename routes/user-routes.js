@@ -32,6 +32,7 @@ module.exports = function (app) {
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             user_name: req.body.user_name,
+            password: req.body.password,
             email: req.body.email
         }).then((dbResults) => {
             res.status(201).json({
@@ -80,5 +81,6 @@ module.exports = function (app) {
             }
         });
     });
+
 
 };

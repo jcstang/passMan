@@ -56,11 +56,12 @@
             </div>
           </div>
         </div>
+        
       </div>
 
 {{!-- Password blocks for each entry --}}
 
-{{each}}
+{{#each passwords}}
 <div class="accordion text-center" id="passBlock{{id}}">
     <div class="card shadow">
         <div class="card-header" id="headingOne">
@@ -120,4 +121,14 @@
         </div>
       </div>
 {{/each}}
+</div>
+
+<div>
+  <h1>WELCOME</h1>
+  {{!-- Jacob Stanger testing --}}
+        {{#each thePasswords}}
+          <h1>{{this}}</h1>
+        {{/each}}
+        {{!-- end of js testing --}}
+  <h1>NO MORE WELCOME</h1>
 </div>
