@@ -42,7 +42,9 @@ module.exports = function (app) {
 
             if(dbUser.password === req.body.loginpassword) {
 
-                // === get passwords and render index passing in the data ====
+                // ***********************************************************
+                // ****** ASSUMPTION - there is only 1 user in the DB ********
+                // ***********************************************************
                 db.Passwords.findAll({}).then(function(dbPasswords) {
                     let passPasswords = [];
                     dbPasswords.forEach(element => {
@@ -56,7 +58,7 @@ module.exports = function (app) {
                     // DATA passing is working. I just refrenced {{username}} and handlebars picked it up
                     let thing = {
                         passwords: passPasswords,
-                        username: dbUser.user_name
+                        username: dbUser.user_name  // this is the logged in username NOT a saved username/password
                     };
 
                     res.render("index", thing);
