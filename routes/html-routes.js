@@ -13,29 +13,38 @@ module.exports = function (app) {
     
     // TODO: protect this page behind login/passport
     app.get('/', (req, res) => {
-        db.Passwords.findAll({}).then(function(dbPasswords) {
-            // let handlebarsObject = {
-            //     passwords: dbPasswords
-            // };
-            let thePasswords = [];
-            dbPasswords.forEach(element => {
-                // console.log(element.id);
-                thePasswords.push({
-                    id: element.id,
-                    description: element.description,
-                    userName: element.userName,
-                    password: element.password
-                })
+        // only welcome page can go to root
+        res.redirect('/welcome');
+        // db.Passwords.findAll({}).then(function(dbPasswords) {
+        //     // let handlebarsObject = {
+        //     //     passwords: dbPasswords
+        //     // };
+        //     let thePasswords = [];
+        //     dbPasswords.forEach(element => {
+        //         // console.log(element.id);
+        //         thePasswords.push({
+        //             id: element.id,
+        //             description: element.description,
+        //             userName: element.userName,
+        //             password: element.password
+        //         })
                 
-            });
-            console.log('######### thePasswords ############################');
-            // console.log(thePasswords);
-            // console.log('######### here is dbPasswords - original data ############################');
-            // console.log(dbPasswords);
+        //     });
+        //     console.log('######### thePasswords ############################');
+        //     // console.log(thePasswords);
+        //     // console.log('######### here is dbPasswords - original data ############################');
+        //     // console.log(dbPasswords);
             
-            res.render("index", thePasswords);
-        });
+        //     res.render("index", thePasswords);
+        // });
     });
+
+    // app.get('/portal', (req, res) => {
+    //     db.Passwords.findAll({}).then(function(dbPasswords) {          
+    //         res.render("index", dbPasswords);
+    //     });
+    //     // res.json(req.user);
+    // });
 
     app.get('/fillOutDB', (req, res) => {
         res.sendFile(path.join(__dirname, "../public/fillOutDB.html"));
@@ -73,10 +82,6 @@ module.exports = function (app) {
     // });
 
 
-
-
-    // passport js
-    // =============================================================
     app.post('/login', (req, res) => {
 
         // search for username in MySQL
@@ -88,23 +93,30 @@ module.exports = function (app) {
         .then((dbUser) => {
             // user is coming here!!!!!! yay!!!!!!
             if(dbUser.password === req.body.loginpassword) {
-                // TODO: go to home page
-                // res.json(dbUser);
-                console.log(dbUser);
-                res.redirect('/');
+
+                // TODO: ANDREW - this is what is rendering index.handlebars. 
+                // === get passwords and render index passing in the data ====
+                db.Passwords.findAll({}).then(function(dbPasswords) {   
+                    // TODO: ?? change the data to make handlebars happy????
+                    
+                    
+
+                    res.render("index", dbPasswords);
+                });
+
+
+                res.render();
             }
 
             res.redirect('/welcome');
-        }).catch((err) => {
-            console.log(error);
+
+        }).catch(() => {
             res.redirect('/welcome');
         });
 
     });
 
-    app.get('/portal', (req, res) => {
-        res.json(req.user);
-    });
+
 
 
     app.post('/signUp',(req, res) => {
