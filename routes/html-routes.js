@@ -1,7 +1,8 @@
 // ***************************************************************************
 // html-routes.js - file conians routes to guide users to html pages
 // ***************************************************************************
-
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 const path = require('path');
 // brings in database models
 let db = require("../models");
@@ -77,24 +78,37 @@ module.exports = function (app) {
     });
 
     app.post('/signUp',(req, res) => {
-        db.User.create({
-            first_name: req.body.firstname,
-            last_name: req.body.lastname,
-            user_name: req.body.username,
-            password: req.body.userpassword,
-            email: req.body.email
 
-        }).then((dbResults) => {
-            // res.status(201).json({
-            //     id: dbResults.dataValues.id
-            // });
-            res.status(201).render("index", dbResults);
+        bcrypt.genSalt(saltRounds, function(err, salt) {
+            bcrypt.hash(req.body.password, salt, function(err, hash) {
+                let userReadyForSave = {
+                    first_name: req.body.firstname,
+                    last_name: req.body.lastname,
+                    user_name: req.body.username,
+                    password: hash,
+                    email: req.body.email
+                };
 
-        }).catch(() => {
-            res.status(406).send({
-                error: 'something blew up'
+                // create the user
+                db.User.create(userReadyForSave)
+                    .then((dbResults) => {
+                    // res.status(201).json({
+                    //     id: dbResults.dataValues.id
+                    // });
+                    res.status(201).render("index", dbResults);
+        
+                })
+                .catch(() => {
+                    res.status(406).send({
+                        error: 'something blew up'
+                    });
+                });
+
             });
         });
+        
 
     });
+
+    
 }
