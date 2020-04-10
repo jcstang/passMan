@@ -12,8 +12,7 @@ module.exports = function (app) {
     // GET REQUESTS
     // =============================================================
     app.get('/', (req, res) => {
-        // only welcome page can go to root
-        res.redirect('/welcome');
+        res.end('no.... nice try.');
     });
 
     // path just used to fill db with test data.
@@ -29,7 +28,6 @@ module.exports = function (app) {
     // POST REQUESTS
     // =============================================================
     app.post('/login', (req, res) => {
-
         // search for username in MySQL
         db.User.findOne({
             where: {
@@ -38,23 +36,30 @@ module.exports = function (app) {
         })
         .then((dbUser) => {
             // user is coming here!!!!!! yay!!!!!!
+            console.log('===============')
+            console.log(dbUser);
+
+
             if(dbUser.password === req.body.loginpassword) {
 
-                // TODO: ANDREW - this is what is rendering index.handlebars. 
                 // === get passwords and render index passing in the data ====
-                db.Passwords.findAll({}).then(function(dbPasswords) {   
-                    // TODO: ?? change the data to make handlebars happy????
-                    
-                    
+                db.Passwords.findAll({}).then(function(dbPasswords) {
+                    // DATA passing is working. I just refrenced {{username}} and handlebars picked it up
+                    let thing = {
+                        passwords: dbPasswords,
+                        username: dbUser.user_name
+                    };
 
-                    res.render("index", dbPasswords);
+                    res.render("index", thing);
+
+                }).catch((err) => {
+                    res.end(err);
                 });
 
-
-                res.render();
+            } else {
+                // be careful with redirects. if bugs here look here.
+                res.redirect('/welcome');
             }
-
-            res.redirect('/welcome');
 
         }).catch(() => {
             res.redirect('/welcome');
@@ -63,13 +68,6 @@ module.exports = function (app) {
     });
 
     app.post('/signUp',(req, res) => {
-        console.log(req.body);
-
-        // passport.authenticate('local', {
-        //     successRedirect: '/profile',
-        //     failureRedirect: '/failed'
-        // });
-
         db.User.create({
             first_name: req.body.firstname,
             last_name: req.body.lastname,
@@ -81,10 +79,7 @@ module.exports = function (app) {
             // res.status(201).json({
             //     id: dbResults.dataValues.id
             // });
-            res.status(201).json({
-                id: dbResults.dataValues.id
-            });
-            // res.redirect('/portal');
+            res.status(201).render("index", dbResults);
 
         }).catch(() => {
             res.status(406).send({
