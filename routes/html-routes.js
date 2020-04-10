@@ -3,12 +3,10 @@
 // ***************************************************************************
 
 const path = require('path');
-
 // brings in database models
 let db = require("../models");
 
 module.exports = function (app) {
-    
     // GET REQUESTS
     // =============================================================
     app.get('/', (req, res) => {
@@ -36,7 +34,7 @@ module.exports = function (app) {
         })
         .then((dbUser) => {
             // user is coming here!!!!!! yay!!!!!!
-            console.log('===============')
+            console.log('===============');
             console.log(dbUser);
 
 
