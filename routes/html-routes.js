@@ -3,117 +3,82 @@
 // ***************************************************************************
 
 const path = require('path');
-const passport = require('passport');
-const debug = require('debug');
 
 // brings in database models
 let db = require("../models");
 
 module.exports = function (app) {
     
-    // TODO: protect this page behind login/passport
+    // GET REQUESTS
+    // =============================================================
     app.get('/', (req, res) => {
-        db.Passwords.findAll({}).then(function(dbPasswords) {
-            // let handlebarsObject = {
-            //     passwords: dbPasswords
-            // };
-            let thePasswords = [];
-            dbPasswords.forEach(element => {
-                // console.log(element.id);
-                thePasswords.push({
-                    id: element.id,
-                    description: element.description,
-                    userName: element.userName,
-                    password: element.password
-                })
-                
-            });
-            console.log('######### thePasswords ############################');
-            // console.log(thePasswords);
-            // console.log('######### here is dbPasswords - original data ############################');
-            // console.log(dbPasswords);
-            
-            res.render("index", thePasswords);
-        });
+        res.end('no.... nice try.');
     });
 
+    // path just used to fill db with test data.
     app.get('/fillOutDB', (req, res) => {
         res.sendFile(path.join(__dirname, "../public/fillOutDB.html"));
-    });
-
-
-    // TODO: form stuff
-    // app.get('/login', (req, res) => {
-    //     let routeText = {
-    //         name: "login"
-    //     }
-    //     res.render("login-register", routeText);
-    // });
-
-    app.get('/signup', (req, res) => {
-        let routeText = {
-            name: "signup"
-        }
-        res.render("login-register", routeText);
     });
 
     app.get('/welcome', (req, res) => {
         res.render("welcome");
     });
-    
-
-    
-    // TODO: add a login page with login.handlebars
-    // app.post('/login',(req, res) => {
-    //     // passport stuff here
-    //     // TODO: check if the user is in DB
-    //     // TODO: check if their password is correct
-    //     // If those 2 pass then they can come to the home page
-    //     res.redirect('/');
-    // });
 
 
-
-
-    // passport js
+    // POST REQUESTS
     // =============================================================
     app.post('/login', (req, res) => {
-        // create user here
-        // const { username, password } = req.body;
-        // debug(req.body);
-        // res.json(req);
-        console.log(req.body);
-        // res.end('hi');
-
+        // search for username in MySQL
         db.User.findOne({
             where: {
                 user_name: req.body.loginusername
             }
         })
         .then((dbUser) => {
-            res.json(dbUser);
             // user is coming here!!!!!! yay!!!!!!
+            console.log('===============')
+            console.log(dbUser);
+
+
+            if(dbUser.password === req.body.loginpassword) {
+
+                // ***********************************************************
+                // ****** ASSUMPTION - there is only 1 user in the DB ********
+                // ***********************************************************
+                db.Passwords.findAll({}).then(function(dbPasswords) {
+                    let passPasswords = [];
+                    dbPasswords.forEach(element => {
+                        passPasswords.push({
+                            description: element.description,
+                            username: element.userName,
+                            password: element.password
+                        });
+                    });
+                    
+                    // DATA passing is working. I just refrenced {{username}} and handlebars picked it up
+                    let thing = {
+                        passwords: passPasswords,
+                        username: dbUser.user_name  // this is the logged in username NOT a saved username/password
+                    };
+
+                    res.render("index", thing);
+
+                }).catch((err) => {
+                    res.end(err);
+                });
+
+            } else {
+                // be careful with redirects. if bugs here look here.
+                res.redirect('/welcome');
+            }
+
+        }).catch(() => {
+            res.redirect('/welcome');
         });
 
-        // req.login(req.body, ()=> {
-        //     res.redirect('/portal');
-        // });
     });
 
-    app.get('/portal', (req, res) => {
-        res.json(req.user);
-    });
-
-
-    // TODO: signup route, with adding to mysql
     app.post('/signUp',(req, res) => {
-        console.log(req.body);
-
-        // passport.authenticate('local', {
-        //     successRedirect: '/profile',
-        //     failureRedirect: '/failed'
-        // });
-
         db.User.create({
             first_name: req.body.firstname,
             last_name: req.body.lastname,
@@ -125,10 +90,7 @@ module.exports = function (app) {
             // res.status(201).json({
             //     id: dbResults.dataValues.id
             // });
-            res.status(201).json({
-                id: dbResults.dataValues.id
-            });
-            // res.redirect('/portal');
+            res.status(201).render("index", dbResults);
 
         }).catch(() => {
             res.status(406).send({
@@ -136,8 +98,5 @@ module.exports = function (app) {
             });
         });
 
-        // req.login(req.body, () => {
-        //     res.redirect('/portal');
-        // });
     });
 }
