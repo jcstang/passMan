@@ -28,7 +28,7 @@ module.exports = function (app) {
                 })
                 
             });
-            // console.log('######### thePasswords ############################');
+            console.log('######### thePasswords ############################');
             // console.log(thePasswords);
             // console.log('######### here is dbPasswords - original data ############################');
             // console.log(dbPasswords);
