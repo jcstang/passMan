@@ -3,85 +3,31 @@
 // ***************************************************************************
 
 const path = require('path');
-const passport = require('passport');
-const debug = require('debug');
 
 // brings in database models
 let db = require("../models");
 
 module.exports = function (app) {
     
-    // TODO: protect this page behind login/passport
+    // GET REQUESTS
+    // =============================================================
     app.get('/', (req, res) => {
         // only welcome page can go to root
         res.redirect('/welcome');
-        // db.Passwords.findAll({}).then(function(dbPasswords) {
-        //     // let handlebarsObject = {
-        //     //     passwords: dbPasswords
-        //     // };
-        //     let thePasswords = [];
-        //     dbPasswords.forEach(element => {
-        //         // console.log(element.id);
-        //         thePasswords.push({
-        //             id: element.id,
-        //             description: element.description,
-        //             userName: element.userName,
-        //             password: element.password
-        //         })
-                
-        //     });
-        //     console.log('######### thePasswords ############################');
-        //     // console.log(thePasswords);
-        //     // console.log('######### here is dbPasswords - original data ############################');
-        //     // console.log(dbPasswords);
-            
-        //     res.render("index", thePasswords);
-        // });
     });
 
-    // app.get('/portal', (req, res) => {
-    //     db.Passwords.findAll({}).then(function(dbPasswords) {          
-    //         res.render("index", dbPasswords);
-    //     });
-    //     // res.json(req.user);
-    // });
-
+    // path just used to fill db with test data.
     app.get('/fillOutDB', (req, res) => {
         res.sendFile(path.join(__dirname, "../public/fillOutDB.html"));
-    });
-
-
-    // TODO: form stuff
-    // app.get('/login', (req, res) => {
-    //     let routeText = {
-    //         name: "login"
-    //     }
-    //     res.render("login-register", routeText);
-    // });
-
-    app.get('/signup', (req, res) => {
-        let routeText = {
-            name: "signup"
-        }
-        res.render("login-register", routeText);
     });
 
     app.get('/welcome', (req, res) => {
         res.render("welcome");
     });
-    
-
-    
-    // TODO: add a login page with login.handlebars
-    // app.post('/login',(req, res) => {
-    //     // passport stuff here
-    //     // TODO: check if the user is in DB
-    //     // TODO: check if their password is correct
-    //     // If those 2 pass then they can come to the home page
-    //     res.redirect('/');
-    // });
 
 
+    // POST REQUESTS
+    // =============================================================
     app.post('/login', (req, res) => {
 
         // search for username in MySQL
@@ -115,9 +61,6 @@ module.exports = function (app) {
         });
 
     });
-
-
-
 
     app.post('/signUp',(req, res) => {
         console.log(req.body);
