@@ -53,7 +53,8 @@ module.exports = function (app) {
 
                 if(result === true) {
                     db.Passwords.findAll({}).then(function(dbPasswords) {
-                        res.render("index", helper.createPasswordObject(dbPasswords, dbUser.userName));
+                        let passwordObjectReadyForHandlebars = helper.createPasswordObject(dbPasswords, dbUser.userName);
+                        res.render("index", passwordObjectReadyForHandlebars);
     
                     }).catch((err) => {
                         res.end(err);
