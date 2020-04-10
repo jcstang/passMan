@@ -102,16 +102,20 @@ module.exports = function (app) {
         // });
 
         db.User.create({
-            first_name: 'Philip j.',
-            last_name: 'Fry',
+            first_name: req.body.firstname,
+            last_name: req.body.lastname,
             user_name: req.body.username,
-            password: req.body.password,
+            password: req.body.userpassword,
             email: req.body.email
+
         }).then((dbResults) => {
             // res.status(201).json({
             //     id: dbResults.dataValues.id
             // });
-            res.redirect('/portal');
+            res.status(201).json({
+                id: dbResults.dataValues.id
+            });
+            // res.redirect('/portal');
 
         }).catch(() => {
             res.status(406).send({
@@ -119,8 +123,8 @@ module.exports = function (app) {
             });
         });
 
-        req.login(req.body, () => {
-            res.redirect('/portal');
-        });
+        // req.login(req.body, () => {
+        //     res.redirect('/portal');
+        // });
     });
 }

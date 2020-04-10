@@ -54,35 +54,37 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            
             <div class="modal-body">
-                <form action="/newaccount" method="POST"
+                <form action="/signup" method="POST"
                     oninput='up2.setCustomValidity(up2.value != up.value ? "Passwords do not match." : "")'>
                     <div class="form-group">
                         <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" id="fistName" required>
+                        <input type="text" class="form-control" id="firstName" name="firstname" required>
                     </div>
                     <div class="form-group">
                         <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" required>
+                        <input type="text" class="form-control" id="lastName" name="lastname" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" id="Email" placeholder="JohnD'OH@yourmail.com" required>
+                        <input type="text" class="form-control" id="email" placeholder="JohnD'OH@yourmail.com" name="username" required>
                     </div>
                     <div class="form-group">
-                        <label for="password1">Password</label>
-                        <input type="password1" class="form-control" id="input3" placeholder="password1234" required>
+                        <label for="passwordThing1">Password</label>
+                        <input type="password" class="form-control" id="passwordThing1" placeholder="password1234" name="userpassword" required>
                     </div>
                     <div class="form-group">
-                        <label for="password2">Confirm Password</label>
-                        <input type="password2" class="form-control" id="input4" placeholder="password1234" required>
+                        <label for="passwordThing2">Confirm Password</label>
+                        <input type="password" class="form-control" id="passwordThing2" placeholder="password1234" name="userpassword2" required>
                     </div>
 
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Create Account</button>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Create Account</button>
-            </div>
+
         </div>
     </div>
 </div>
