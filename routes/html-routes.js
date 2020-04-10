@@ -56,6 +56,10 @@ module.exports = function (app) {
         }
         res.render("login-register", routeText);
     });
+
+    app.get('/welcome', (req, res) => {
+        res.render("welcome");
+    });
     
 
     
