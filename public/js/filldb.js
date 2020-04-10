@@ -12,6 +12,7 @@ $(document).ready(function () {
         first_name: "Peter",
         last_name: "Quill",
         user_name: "starlord227",
+        password: "mycoolship",
         email: "coolguy@nova.com"
     };
 
