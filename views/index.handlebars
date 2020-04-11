@@ -12,8 +12,13 @@
 
 {{!-- Lettering and add new password button --}}
 <div class="row">
+  <div class="col-md-12">
+    <h2 class="font-weight-bold text-center">Welcome, {{theusername}}</h2>
+  </div>
+</div>
+<div class="row">
     <div class=".card-message"></div>
-    <div class="col-md-6"><h3 class="font-weight-bold">Passwords - Welcome, {{username}}!</h3></div>
+    <div class="col-md-6"><h3 class="font-weight-bold">Passwords</h3></div>
     <div class="col-md-6 text-right text-bottom">
         <span class="align-bottom pr-2 font-weight-bold">Add a new password</span> 
         
@@ -35,26 +40,32 @@
             </div>
             <div class="modal-body">
                 {{!-- TODO: verify code below will work --}}
-                {{!-- TODO: This one is for you Andrew OR Tim OR JacobA, make this form submit "/api/passwords" --}}
+                {{!-- TODO: This one is for you Andrew OR Tim OR Jacob1, make this form submit "/api/passwords" --}}
+
               <form method="POST" action="/api/passwords">
                 <div class="form-group">
-                  <label for="siteName">Site Name</label>
-                  <input type="text" class="form-control" id="input1" placeholder="Website.com">
+                  <label for="siteName">Description</label>
+                  <input type="text" class="form-control" id="input1" placeholder="password for my bank" name="description">
                 </div>
                 <div class="form-group">
                   <label for="username">Username</label>
-                  <input type="text" class="form-control" id="input2" placeholder="JohnD'OH@yourmail.com">
+                  <input type="text" class="form-control" id="input2" placeholder="JohnD'OH@yourmail.com" name="userName">
                 </div>
                 <div class="form-group">
                   <label for="password">password</label>
-                  <input type="password" class="form-control" id="input3" placeholder="password1234">
+                  <input type="password" class="form-control" id="input3" placeholder="password1234" name="password">
+                  <input type="hidden" name="ownerKey" value="{{theId}}">
                 </div>
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" type="button" class="btn btn-primary">Save changes</button>
               </form>
+
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
             </div>
+
+
           </div>
         </div>
         
@@ -70,7 +81,7 @@
                 <button class="btn" type="button" data-toggle="collapse" data-target="#collapse{{id}}" aria-expanded="true"
                     aria-controls="collapseOne">
                     <h3 class="font-weight-bold text-muted">{{description}}</h3><button type="button"
-                        class="btn btn-light btn-lg float-right" data-toggle="modal" data-target="#editEntryModal"><i
+                        class="btn btn-light btn-lg float-right" data-toggle="modal" data-target="#editEntryModal{{id}}"><i
                             class="fas fa-cog text-muted"></i></button>
                 </button>
             </h2>
@@ -99,24 +110,26 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="/api/passwords" method="PUT">
+              <form action="/api/passwords?_method=PUT" method="post">
+              <input type="hidden" name="_method" value="PUT">
                 <div class="form-group">
                   <label for="siteName">Site Name</label>
-                  <input type="text" class="form-control" id="input1" value="{{sitename}}">
+                  <input type="hidden"  id="input0" name="passId" value="{{id}}">
+                  <input type="text" class="form-control" id="input1" name="description" value="{{description}}">
                 </div>
                 <div class="form-group">
                   <label for="username">Username</label>
-                  <input type="text" class="form-control" id="input2" value="{{username}}">
+                  <input type="text" class="form-control" id="input2" name="userName" value="{{username}}">
                 </div>
                 <div class="form-group">
                   <label for="password">password</label>
-                  <input type="text" class="form-control" id="input3" value="{{password}}">
+                  <input type="text" class="form-control" id="input3" name="password" value="{{password}}">
                 </div>
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Update</button>
+              
+              <button type="submit" class="btn btn-primary">Update</button>
             </div>
           </div>
         </div>

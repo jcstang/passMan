@@ -2,6 +2,7 @@
 // password-routes.js
 // ***************************************************************************
 let db = require("../models");
+const helper = require("../helperFuncs");
 
 
 module.exports = function (app) {
@@ -59,9 +60,23 @@ module.exports = function (app) {
             password: req.body.password,
             ownerKey: req.body.ownerKey
         }).then((dbResults) => {
-            res.status(201).json({
-                id: dbResults.dataValues.id
-            });
+            // res.status(201).json({
+            //     id: dbResults.dataValues.id
+            // });
+            // res.render("success");
+            // res.status(201).render("index", pulling all of the data here and passing it to the view)
+            // res.status(201).render("index");
+
+            // res.redirect("/portal/1");
+            // let hashedKey = 'sa;fkjsfkl;dajfsl;jsd'
+            let route = `/portal/${req.body.ownerKey}`;
+            console.log(route);
+            res.redirect(route);
+
+            // res.redirect('/portal/1');
+
+
+
         }).catch((err) => {
             res.status(406).json({
                 message: 'something blew up ',
@@ -75,15 +90,15 @@ module.exports = function (app) {
     app.put("/api/passwords", (req, res) => {
 
         db.Passwords.update(
-            req.body, {
-                where: {
-                    // id: 1
-                    id: req.body.id
-                    // TODO: Andrew, figure out this
-                }
-            }).then((dbPassword) => {
+            {
+                description: req.body.description,
+                userName: req.body.userName,
+                password: req.body.password
+            },
+            {returning: true, where: { id: req.body.passId}}
+            ).then((dbPassword) => {
             res.json(dbPassword);
-        }).catch(() => {
+        }).catch()(() => {
             res.status(500).send({
                 error: "idk, something blew up"
             });

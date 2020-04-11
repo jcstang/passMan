@@ -8,6 +8,7 @@ const debug = require("debug")('server');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const methodOverride = require('method-override');
 
 // sets up the express app
 // =============================================================
@@ -32,6 +33,7 @@ app.use(cookieParser());
 app.use(session({
     secret: 'new new york'
 }));
+app.use(methodOverride('_method'));
 
 require('./config/passport.js')(app);
 
@@ -61,7 +63,7 @@ app.set("view engine", "handlebars");
 // Syncing our sequelize models and then starting our express app
 // =============================================================
 db.sequelize.sync({
-    force: true
+    force: false
 }).then(function () {
     app.listen(PORT, function () {
         debug(`server.js listening on port: ${PORT}`);
