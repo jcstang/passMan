@@ -1,4 +1,5 @@
 let db = require("../models");
+const bcrypt = require('bcrypt');
 
 module.exports = function (app) {
 
@@ -28,6 +29,44 @@ module.exports = function (app) {
     // POST
     // =============================================================
     app.post("/api/users/new", (req, res) => {
+        // const saltRounds = 10;
+        // let passwordInput = req.body.user_name
+
+        // bcrypt.genSalt(saltRounds, function(err, salt) {
+        //     bcrypt.hash(passwordInput, salt, function(err, hash) {
+        //         // console.log(err);
+                
+        //             let userReadyForSave = {
+        //                 first_name: req.body.firstname,
+        //                 last_name: req.body.lastname,
+        //                 user_name: req.body.username,
+        //                 password: hash,
+        //                 email: req.body.email
+        //             };
+    
+        //             // create the user
+        //             db.User.create(userReadyForSave)
+        //                 .then((dbCreatedUser) => {
+        //                 // ============================================================
+        //                 // TODO: Pass the passwords here instead of dbResults. how do we get passwords?
+        //                 // res.status(201).render("index", dbCreatedUser);
+                        
+            
+        //             })
+        //             .catch((err) => {
+        //                 console.log(err);
+                        
+        //                 res.status(406).send({
+        //                     error: 'something blew up'
+        //                 });
+        //             });
+                
+
+        //     });
+        // });
+
+
+
         db.User.create({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
