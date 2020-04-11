@@ -61,12 +61,19 @@ module.exports = function (app) {
             ownerKey: req.body.ownerKey
         }).then((dbResults) => {
             // res.status(201).json({
-                // id: dbResults.dataValues.id
+            //     id: dbResults.dataValues.id
             // });
+            // res.render("success");
             // res.status(201).render("index", pulling all of the data here and passing it to the view)
-            res.status(201).render("index");
+            // res.status(201).render("index");
 
-            // res.redirect("/");
+            // res.redirect("/portal/1");
+            // let hashedKey = 'sa;fkjsfkl;dajfsl;jsd'
+            let route = `/portal/${req.body.ownerKey}`;
+            console.log(route);
+            res.redirect(route);
+
+            // res.redirect('/portal/1');
 
 
 

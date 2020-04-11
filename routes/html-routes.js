@@ -28,6 +28,34 @@ module.exports = function (app) {
         res.render("welcome");
     });
 
+    app.get('/portal/:id', (req, res) => {
+        // get passwords ownerKey
+        let ownerKey = req.params.id;
+        console.log('req.params.id: ' + ownerKey);
+        db.User.findOne({
+            where: {
+                // user_name: ownerKey
+                id: ownerKey
+            }
+        }).then((dbUser) => {
+            console.log(dbUser);
+
+            db.Passwords.findAll({
+                //** conditional would go here **
+            }).then(function(dbPasswords) {
+                console.log('========================================= thing1');
+                let passwordObjectReadyForHandlebars = helper.createPasswordObject(dbPasswords, dbUser);
+                console.log(passwordObjectReadyForHandlebars);
+                res.render("index", passwordObjectReadyForHandlebars);
+
+            }).catch((err) => {
+                console.log('========================================= thing2');
+                res.end(err);
+            });
+        })
+        // render index passing in the passwords. 
+    });
+
 
     // POST REQUESTS
     // =============================================================

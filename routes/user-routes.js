@@ -22,7 +22,7 @@ module.exports = function (app) {
                 }
             })
             .then((dbUser) => {
-                res.json(dbUser)
+                res.json(dbUser);
             });
     });
 
