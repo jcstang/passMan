@@ -12,28 +12,42 @@ let db = require("../models");
 module.exports = function (app) {
     
     // TODO: protect this page behind login/passport
-    app.get('/', (req, res) => {
+    app.get('/:id', (req, res) => {
         db.Passwords.findAll({}).then(function(dbPasswords) {
             // let handlebarsObject = {
             //     passwords: dbPasswords
             // };
-            let thePasswords = [];
-            dbPasswords.forEach(element => {
-                // console.log(element.id);
-                thePasswords.push({
-                    id: element.id,
-                    description: element.description,
-                    userName: element.userName,
-                    password: element.password
-                })
+            // let thePasswords = [];
+            // dbPasswords.forEach(element => {
+            //     // console.log(element.id);
+            //     thePasswords.push({
+            //         id: element.id,
+            //         description: element.description,
+            //         userName: element.userName,
+            //         password: element.password
+            //     })
                 
-            });
+            // });
             // console.log('######### thePasswords ############################');
             // console.log(thePasswords);
-            // console.log('######### here is dbPasswords - original data ############################');
-            // console.log(dbPasswords);
-            
-            res.render("index", thePasswords);
+            console.log('######### here is dbPasswords - original data ############################');
+            console.log(dbPasswords);
+
+            var ourStuff = {
+                passwords: dbPasswords
+            }
+           
+            res.render("index", ourStuff);
+
+            // let a = {
+            //     id: element.id,
+            //     description: element.description,
+            //     userName: element.userName,
+            //     password: element.password
+            // }
+            // res.render("index", function (err, thePasswords){
+            //     res.send(`<h1>${thePasswords}</h1>`)
+            // });
         });
     });
 

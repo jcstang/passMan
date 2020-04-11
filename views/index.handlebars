@@ -13,7 +13,7 @@
 {{!-- Lettering and add new password button --}}
 <div class="row">
     <div class=".card-message"></div>
-    <div class="col-md-6"><h3 class="font-weight-bold">Passwords</h3></div>
+    <div class="col-md-6"><h3 class="font-weight-bold">Passwords{{name}}</h3></div>
     <div class="col-md-6 text-right text-bottom">
         <span class="align-bottom pr-2 font-weight-bold">Add a new password</span> 
         
@@ -69,7 +69,7 @@
                 <button class="btn" type="button" data-toggle="collapse" data-target="#collapse{{id}}" aria-expanded="true"
                     aria-controls="collapseOne">
                     <h3 class="font-weight-bold text-muted">{{siteName}}</h3><button type="button"
-                        class="btn btn-light btn-lg float-right" data-toggle="modal" data-target="#editEntryModal"><i
+                        class="btn btn-light btn-lg float-right" data-toggle="modal" data-target="#editEntryModal{{id}}"><i
                             class="fas fa-cog text-muted"></i></button>
                 </button>
             </h2>
@@ -125,10 +125,13 @@
 
 <div>
   <h1>WELCOME</h1>
+  {{> password}}
   {{!-- Jacob Stanger testing --}}
-        {{#each thePasswords}}
-          <h1>{{this}}</h1>
-        {{/each}}
+        {{!-- {{#with dbPasswords}}
+          <h1>{{id}}</h1>
+          {{}}
+          <p>does this show up?</p>
+        {{/with}} --}}
         {{!-- end of js testing --}}
   <h1>NO MORE WELCOME</h1>
 </div>
