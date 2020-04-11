@@ -2,6 +2,7 @@
 // password-routes.js
 // ***************************************************************************
 let db = require("../models");
+const helper = require("../helperFuncs");
 
 
 module.exports = function (app) {
@@ -59,9 +60,16 @@ module.exports = function (app) {
             password: req.body.password,
             ownerKey: req.body.ownerKey
         }).then((dbResults) => {
-            res.status(201).json({
-                id: dbResults.dataValues.id
-            });
+            // res.status(201).json({
+                // id: dbResults.dataValues.id
+            // });
+            // res.status(201).render("index", pulling all of the data here and passing it to the view)
+            res.status(201).render("index");
+
+            // res.redirect("/");
+
+
+
         }).catch((err) => {
             res.status(406).json({
                 message: 'something blew up ',

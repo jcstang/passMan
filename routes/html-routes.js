@@ -9,10 +9,14 @@ const helper = require('../helperFuncs');
 let db = require("../models");
 
 module.exports = function (app) {
+
     // GET REQUESTS
     // =============================================================
     app.get('/', (req, res) => {
         res.end('no.... nice try.');
+        // go get passwords
+        // render index
+        // what about the user?
     });
 
     // path just used to fill db with test data.
@@ -55,8 +59,13 @@ module.exports = function (app) {
                 }
 
                 if(result === true) {
-                    db.Passwords.findAll({}).then(function(dbPasswords) {
-                        let passwordObjectReadyForHandlebars = helper.createPasswordObject(dbPasswords, dbUser.user_name);
+                    // ***********************************************************
+                    // ****** ASSUMPTION - there is only 1 user in the DB ********
+                    // ***********************************************************
+                    db.Passwords.findAll({
+                        //** conditional would go here **
+                    }).then(function(dbPasswords) {
+                        let passwordObjectReadyForHandlebars = helper.createPasswordObject(dbPasswords, dbUser);
 
                         res.render("index", passwordObjectReadyForHandlebars);
     
@@ -75,9 +84,6 @@ module.exports = function (app) {
 
             // if(dbUser.password === req.body.loginpassword) {
 
-            //     // ***********************************************************
-            //     // ****** ASSUMPTION - there is only 1 user in the DB ********
-            //     // ***********************************************************
             //     db.Passwords.findAll({}).then(function(dbPasswords) {
             //         let passPasswords = [];
             //         dbPasswords.forEach(element => {
