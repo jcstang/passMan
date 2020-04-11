@@ -104,7 +104,8 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="/api/passwords" method="PUT">
+              <form action="/api/passwords?_method=PUT" method="post">
+              <input type="hidden" name="_method" value="PUT">
                 <div class="form-group">
                   <label for="siteName">Site Name</label>
                   <input type="hidden"  id="input0" name="passId" value="{{id}}">

@@ -72,7 +72,7 @@ module.exports = function (app) {
 
     // PUT
     // =============================================================
-    app.put("/api/passwords", (req, res, next) => {
+    app.put("/api/passwords", (req, res) => {
 
         db.Passwords.update(
             {
@@ -83,7 +83,7 @@ module.exports = function (app) {
             {returning: true, where: { id: req.body.passId}}
             ).then((dbPassword) => {
             res.json(dbPassword);
-        }).catch(next)(() => {
+        }).catch()(() => {
             res.status(500).send({
                 error: "idk, something blew up"
             });
