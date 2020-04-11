@@ -8,6 +8,7 @@ function createPasswordObject(passwordObject, userName) {
     let passPasswords = [];
     passwordObject.forEach(element => {
         passPasswords.push({
+            id: element.id,
             description: element.description,
             username: element.userName,
             password: element.password

@@ -29,6 +29,7 @@ module.exports = function (app) {
     // =============================================================
     app.post('/login', (req, res) => {
         // search for username in MySQL
+
         db.User.findOne({
             where: {
                 user_name: req.body.loginusername
@@ -43,6 +44,8 @@ module.exports = function (app) {
             const passwordFromDB = dbUser.password;
             const passwordFromInput = req.body.loginpassword;
 
+            // console.log(bcrypt);
+
             // Load hash from your password DB.
             bcrypt.compare(passwordFromInput, passwordFromDB, function(err, result) {
                 // result == true
@@ -54,6 +57,7 @@ module.exports = function (app) {
                 if(result === true) {
                     db.Passwords.findAll({}).then(function(dbPasswords) {
                         let passwordObjectReadyForHandlebars = helper.createPasswordObject(dbPasswords, dbUser.userName);
+
                         res.render("index", passwordObjectReadyForHandlebars);
     
                     }).catch((err) => {
@@ -129,6 +133,7 @@ module.exports = function (app) {
                     // create the user
                     db.User.create(userReadyForSave)
                         .then((dbCreatedUser) => {
+
                         // ============================================================
                         // TODO: Pass the passwords here instead of dbResults. how do we get passwords?
                         res.status(201).render("index", dbCreatedUser);
