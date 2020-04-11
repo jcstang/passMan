@@ -56,7 +56,7 @@ module.exports = function (app) {
 
                 if(result === true) {
                     db.Passwords.findAll({}).then(function(dbPasswords) {
-                        let passwordObjectReadyForHandlebars = helper.createPasswordObject(dbPasswords, dbUser.userName);
+                        let passwordObjectReadyForHandlebars = helper.createPasswordObject(dbPasswords, dbUser.user_name);
 
                         res.render("index", passwordObjectReadyForHandlebars);
     
@@ -136,7 +136,7 @@ module.exports = function (app) {
 
                         // ============================================================
                         // TODO: Pass the passwords here instead of dbResults. how do we get passwords?
-                        res.status(201).render("index", dbCreatedUser);
+                        res.status(201).render("welcome", dbCreatedUser);
             
                     })
                     .catch((err) => {

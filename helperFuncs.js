@@ -5,6 +5,8 @@ function isANumber(value) {
 }
 
 function createPasswordObject(passwordObject, userName) {
+    
+    
     let passPasswords = [];
     passwordObject.forEach(element => {
         passPasswords.push({
@@ -18,9 +20,9 @@ function createPasswordObject(passwordObject, userName) {
     // DATA passing is working. I just refrenced {{username}} and handlebars picked it up
     let finishedObject = {
         passwords: passPasswords,
-        username: userName  // this is the logged in username NOT a saved username/password
+        theusername: userName  // this is the logged in username NOT a saved username/password
     };
-
+    
     return finishedObject;
 }
 

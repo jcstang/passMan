@@ -72,18 +72,18 @@ module.exports = function (app) {
 
     // PUT
     // =============================================================
-    app.put("/api/passwords", (req, res) => {
+    app.put("/api/passwords", (req, res, next) => {
 
         db.Passwords.update(
-            req.body, {
-                where: {
-                    // id: 1
-                    id: req.body.id
-                    // TODO: Andrew, figure out this
-                }
-            }).then((dbPassword) => {
+            {
+                description: req.body.description,
+                userName: req.body.userName,
+                password: req.body.password
+            },
+            {returning: true, where: { id: req.body.passId}}
+            ).then((dbPassword) => {
             res.json(dbPassword);
-        }).catch(() => {
+        }).catch(next)(() => {
             res.status(500).send({
                 error: "idk, something blew up"
             });
