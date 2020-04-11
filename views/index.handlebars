@@ -104,8 +104,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="/api/passwords?_method=PUT" method="post">
-              <input type="hidden" name="_method" value="PUT">
+              <form action="/api/passwords?_method=PUT" method="post" enctype="application/x-www-form-urlencoded">
                 <div class="form-group">
                   <label for="siteName">Site Name</label>
                   <input type="hidden"  id="input0" name="passId" value="{{id}}">
@@ -119,11 +118,12 @@
                   <label for="password">password</label>
                   <input type="text" class="form-control" id="input3" name="password" value="{{password}}">
                 </div>
+              <input type="hidden" name="_method" value="PUT">
+              <button type="submit" class="btn btn-primary">Update</button>
               </form>
             </div>
             <div class="modal-footer">
               
-              <button type="submit" class="btn btn-primary">Update</button>
             </div>
           </div>
         </div>

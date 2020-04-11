@@ -76,11 +76,12 @@ module.exports = function (app) {
 
         db.Passwords.update(
             {
+                id: req.body.id,
                 description: req.body.description,
                 userName: req.body.userName,
                 password: req.body.password
             },
-            {returning: true, where: { id: req.body.passId}}
+            // {returning: true, where: { id: req.body.passId}}
             ).then((dbPassword) => {
             res.json(dbPassword);
         }).catch()(() => {
