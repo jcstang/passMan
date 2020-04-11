@@ -73,10 +73,13 @@ module.exports = function (app) {
     // PUT
     // =============================================================
     app.put("/api/passwords", (req, res) => {
+
         db.Passwords.update(
             req.body, {
                 where: {
+                    // id: 1
                     id: req.body.id
+                    // TODO: Andrew, figure out this
                 }
             }).then((dbPassword) => {
             res.json(dbPassword);
