@@ -3,43 +3,70 @@
 // ***************************************************************************
 // ** Dependencies **
 const path = require('path');
-const express = require("express");
-const debug = require("debug")('server');
+const express = require('express');
+const debug = require('debug')('server');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const methodOverride = require('method-override');
-
+const bodyParser = require('body-parser');
+// const passport = require('passport');
+// const LocalStrategy = require('passport-local').Strategy;
+const flash = require('connect-flash');
 // sets up the express app
 // =============================================================
 const app = express();
 const PORT = process.env.PORT || 8181;
-
-// TODO: implement PASSPORT.JS
-// TODO: come up with more todos for that
-// Jacob S. is working on this currently. 
-
-
 // brings in database models
 let db = require("./models");
 
-// Sets up the Express app to handle data parsing
-app.use(express.urlencoded({
-    extended: true
-}));
-app.use(express.json());
-app.use(morgan('dev'));
-app.use(cookieParser());
+
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: 'new new york'
 }));
+app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(passport.initialize());
+// app.use(passport.session());
 app.use(methodOverride('_method'));
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(flash());
+app.use(cookieParser());
 
 require('./config/passport.js')(app);
 
+// passport.use(new LocalStrategy(
+//     function(username, password, done) {
+//         db.User.findOne({
+//             userName: username
+//         }, function(err, user) {
+//             if (err) { return done(err); }
+//             if (!user) {
+//                 return done(null, false, {message: 'incorrect username.'});
+//             }
+//             if(!user.validPassword(password)) {
+//                 return done(null, false, { message: 'incorrect password' });
+//             }
+
+//             return done(null, user);
+//         });
+//     }
+// ));
+
+// passport.serializeUser((user, done) => {
+//     done(null, user);
+// });
+
+// // retrieves user from session
+// passport.deserializeUser((user, done) => {
+//     done(null, user);
+// });
+
+
+
 // Static Directory
 // app.use(express.static("public"));
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 // =============================================================

@@ -68,12 +68,28 @@ module.exports = function (app) {
     //         res.redirect('/');
     //     });
 
-    app.post('/login',
+    // app.post('/login',
+    //     passport.authenticate('local', {
+    //         successRedirect: '/portal',
+    //         failureRedirect: '/login',
+    //         failureFlash: true
+    //     })
+    // );
+
+    app.post('/login', (req, res) => {
+        // passport.authenticate('local', {
+        //     successRedirect: '/portal',
+        //     failureRedirect: '/login',
+        //     failureFlash: true
+        // });
+        console.log('============ inside of post /login =======');
         passport.authenticate('local', {
             successRedirect: '/portal',
-            failureRedirect: '/login'
-        })
-    );
+            failureRedirect: '/welcome'
+        });
+        
+        console.log('============ inside of post /login at the end=======');
+    });
 
     // app.post('/login', (req, res) => {
     //     // search for username in MySQL
@@ -163,46 +179,73 @@ module.exports = function (app) {
 
     // });
 
-    app.post('/signUp', (req, res) => {
-        const passwordInput = req.body.userpassword;
-        console.log('##$%%$#@#$%$#');
-        console.log(passwordInput);
+    app.post('/signup', (req, res) => {
+        let userReadyForSave = {
+            first_name: req.body.firstname,
+            last_name: req.body.lastname,
+            user_name: req.body.username,
+            password: req.body.userpassword,
+            email: req.body.email
+        };
 
-        bcrypt.genSalt(saltRounds, function (err, salt) {
-            bcrypt.hash(passwordInput, salt, function (err, hash) {
-                // console.log(err);
+        // create the user
+        db.User.create(userReadyForSave)
+            .then((dbCreatedUser) => {
+                res.status(201).render("welcome", dbCreatedUser);
 
-                let userReadyForSave = {
-                    first_name: req.body.firstname,
-                    last_name: req.body.lastname,
-                    user_name: req.body.username,
-                    password: hash,
-                    email: req.body.email
-                };
+            })
+            .catch((err) => {
+                console.log(err);
 
-                // create the user
-                db.User.create(userReadyForSave)
-                    .then((dbCreatedUser) => {
-
-                        // ============================================================
-                        // TODO: Pass the passwords here instead of dbResults. how do we get passwords?
-                        res.status(201).render("welcome", dbCreatedUser);
-
-                    })
-                    .catch((err) => {
-                        console.log(err);
-
-                        res.status(406).send({
-                            error: 'something blew up'
-                        });
-                    });
-
-
+                res.status(406).send({
+                    error: 'something blew up'
+                });
             });
-        });
-
-
     });
+
+
+    // bcrypt version
+    // =============================================================
+    // app.post('/signUp', (req, res) => {
+    //     const passwordInput = req.body.userpassword;
+    //     console.log('##$%%$#@#$%$#');
+    //     console.log(passwordInput);
+
+    //     bcrypt.genSalt(saltRounds, function (err, salt) {
+    //         bcrypt.hash(passwordInput, salt, function (err, hash) {
+    //             // console.log(err);
+
+    //             let userReadyForSave = {
+    //                 first_name: req.body.firstname,
+    //                 last_name: req.body.lastname,
+    //                 user_name: req.body.username,
+    //                 password: hash,
+    //                 email: req.body.email
+    //             };
+
+    //             // create the user
+    //             db.User.create(userReadyForSave)
+    //                 .then((dbCreatedUser) => {
+
+    //                     // ============================================================
+    //                     // TODO: Pass the passwords here instead of dbResults. how do we get passwords?
+    //                     res.status(201).render("welcome", dbCreatedUser);
+
+    //                 })
+    //                 .catch((err) => {
+    //                     console.log(err);
+
+    //                     res.status(406).send({
+    //                         error: 'something blew up'
+    //                     });
+    //                 });
+
+
+    //         });
+    //     });
+
+
+    // });
 
 
 }
