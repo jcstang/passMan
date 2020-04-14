@@ -164,14 +164,31 @@ module.exports = function (app) {
     // });
 
     app.delete("/api/passwords/:id", (req, res) => {
+        let userId;
+        console.log('============================================================================================================');
+        console.log(req);
+        console.log('============================================================================================================');
+
+        db.Passwords.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then((dbPassword) => {
+            console.log('==========================================================');
+            
+            console.log(dbPassword);
+            userId = dbPassword.ownerKey;
+        });
 
         db.Passwords.destroy({
             where: {
                 id: req.params.id
             }
-        }).then(() => {
-            let route = `/portal/${req.params.id}`;
+        }).then((dbPassword) => {
+
+            let route = `/portal/${userId}`;
             res.redirect(route);
+            // res.end('i am done.');
         }).catch((err) => {
             res.status(406).json({
                 message: 'something blew up ',
