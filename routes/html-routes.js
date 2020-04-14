@@ -20,6 +20,10 @@ module.exports = function (app) {
         res.redirect('/welcome');
     });
 
+    app.get("login", (req, res) => {
+        res.end('hi');
+    });
+
     // path just used to fill db with test data.
     app.get('/fillOutDB', (req, res) => {
         res.sendFile(path.join(__dirname, "../public/fillOutDB.html"));
@@ -190,6 +194,20 @@ module.exports = function (app) {
         });
         
 
+    });
+
+    // this route was created to prevent a get request to soemthing like:
+    // '/login?passId=1&description=facebook+after+edits+have+been+made+v5&userName=bill%40gmail.com&password=password445566&_method=PUT'
+    // which leads to a 'CANNOT /GET'
+    // =============================================================
+    app.get("/login?*", (req, res) => {
+        console.log(req);
+        console.log('=================================');
+        // res.end('end of the road.');
+        // ***************************************************************************
+        // flawed logic here. we are redirecting to /portal/passWordId instead of /porta/userId
+        // ***************************************************************************
+        res.redirect(`/portal/${req.query.passId}`);
     });
 
 

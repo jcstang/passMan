@@ -6,13 +6,14 @@
 $(document).ready(function () {
     console.log('jquery loaded.');
 
-    $("#updateButton").on("click", function() {
+    $("#updateButton").on("click", function(event) {
         // let updateObject = {
         //     id: 1,
         //     description: "facebook after edits have been made"
         // }
 
         // console.log($("#updateButton").attr("data-id"));
+        event.preventDefault;
 
         let updateObject = {
             id: $("#updateButton").attr("data-id"),

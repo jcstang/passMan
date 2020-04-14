@@ -131,10 +131,10 @@
               <input type="hidden" name="_method" value="PUT">
             </div>
             <div class="modal-footer edit-modal-footer justify-content-between">
-              <button type="submit" class="btn btn-primary" id="updateButton" data-id="{{id}}">Update</button>
+              <button class="btn btn-primary" id="updateButton" data-id="{{id}}">Update</button>
               
               </form>
-              <form action="/api/passwords/{{id}}?_method=DELETE" method="POST" ><input type="hidden" value="{{id}}"><input type="hidden" name="_method" value="DELETE"><button type="submit" class="btn btn-danger">Remove</button></form>
+              {{!-- <form action="/api/passwords/{{id}}?_method=DELETE" method="POST" ><input type="hidden" value="{{id}}"><input type="hidden" name="_method" value="DELETE"><button type="submit" class="btn btn-danger">Remove</button></form> --}}
             </div>
           </div>
         </div>
