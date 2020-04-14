@@ -87,7 +87,7 @@ module.exports = function (app) {
 
     // PUT
     // =============================================================
-    app.put("/api/passwords/delete", (req, res) => {
+    app.put("/api/passwords/", (req, res) => {
         // console.log(req);
         
 
