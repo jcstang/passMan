@@ -103,8 +103,8 @@ module.exports = function (app) {
 
                 } else {
                     //no go bro
-                    // res.redirect('/welcome');
-                    res.end('hash didnt work??');
+                    res.redirect('/welcome');
+                    // res.end('hash didnt work??');
                 }
 
             });
