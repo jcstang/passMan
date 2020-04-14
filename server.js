@@ -5,7 +5,7 @@
 const path = require('path');
 const express = require("express");
 const debug = require("debug")('server');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const methodOverride = require('method-override');
@@ -28,7 +28,7 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.use(express.json());
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session({
     secret: 'new new york'
