@@ -6,33 +6,33 @@
 $(document).ready(function () {
     console.log('jquery loaded.');
 
-    $("#updateButton").on("click", function(event) {
-        // let updateObject = {
-        //     id: 1,
-        //     description: "facebook after edits have been made"
-        // }
+    // $("#updateButton").on("click", function(event) {
+    //     // let updateObject = {
+    //     //     id: 1,
+    //     //     description: "facebook after edits have been made"
+    //     // }
 
-        // console.log($("#updateButton").attr("data-id"));
-        event.preventDefault;
+    //     // console.log($("#updateButton").attr("data-id"));
+    //     event.preventDefault;
 
-        let updateObject = {
-            id: $("#updateButton").attr("data-id"),
-            description: $("#desc-id").val(),
-            userName: $("#username-id").val(),
-            password: $("#password-id").val()
-        }
+    //     let updateObject = {
+    //         id: $("#updateButton").attr("data-id"),
+    //         description: $("#desc-id").val(),
+    //         userName: $("#username-id").val(),
+    //         password: $("#password-id").val()
+    //     }
     
-        $.ajax({
-            url: '/api/passwords',
-            type: 'PUT',
-            data: updateObject,
-            success: function(result) {
-                console.log(result);
+    //     $.ajax({
+    //         url: '/api/passwords',
+    //         type: 'PUT',
+    //         data: updateObject,
+    //         success: function(result) {
+    //             console.log(result);
                 
-            }
-        });
+    //         }
+    //     });
 
-    });
+    // });
 
     
     console.log('end of jquery file.')

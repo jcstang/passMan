@@ -113,8 +113,8 @@
               </button>
             </div>
             <div class="modal-body">
-              {{!-- <form action="/api/passwords?_method=PUT" method="post" enctype="application/x-www-form-urlencoded"> --}}
-              <form>
+              <form action="/api/passwords?_method=PUT" method="post" enctype="application/x-www-form-urlencoded">
+              {{!-- <form> --}}
                 <div class="form-group">
                   <label for="siteName">Site Name</label>
                   <input type="hidden"  id="input0" name="passId" value="{{id}}">
@@ -134,7 +134,7 @@
               <button class="btn btn-primary" id="updateButton" data-id="{{id}}">Update</button>
               
               </form>
-              {{!-- <form action="/api/passwords/{{id}}?_method=DELETE" method="POST" ><input type="hidden" value="{{id}}"><input type="hidden" name="_method" value="DELETE"><button type="submit" class="btn btn-danger">Remove</button></form> --}}
+              <form action="/api/passwords/{{id}}?_method=DELETE" method="POST" ><input type="hidden" value="{{id}}"><input type="hidden" name="_method" value="DELETE"><button type="submit" class="btn btn-danger">Remove</button></form>
             </div>
           </div>
         </div>
