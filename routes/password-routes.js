@@ -88,26 +88,37 @@ module.exports = function (app) {
     // PUT
     // =============================================================
     app.put("/api/passwords", (req, res) => {
-
+        console.log(req);
+        
 
         db.Passwords.update(
             {
-                id: req.body.id,
                 description: req.body.description,
                 userName: req.body.userName,
                 password: req.body.password
             },
             {
-                where: req.body.id,
+                where: {id: req.body.passId}
             }
             
-            ).then((dbPassword) => {
-            res.json(dbPassword);
-        }).catch()(() => {
-            res.status(500).send({
-                error: "idk, something blew up"
+            )
+            .then(function (dbPassword) {
+                res.json(dbPassword);
+                // TODO: handlebars ready
+                // TODO: res.render stuff
+                // TODO: also pass it handlebars formatted data from dbPassword
+                // See below
+                //TIM will attempt to work on this one
+
+                
             });
-        });
+        //     .then((dbPassword) => {
+        //     res.json(dbPassword);
+        // }).catch()(() => {
+        //     res.status(500).send({
+        //         error: "idk, something blew up"
+        //     });
+        // });
     });
 
     // DELETE
