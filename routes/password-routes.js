@@ -87,27 +87,49 @@ module.exports = function (app) {
 
     // PUT
     // =============================================================
+    // app.put("/api/passwords/", (req, res) => {
+    //     // console.log(req);
+    //     let passwordId = req.body.id;
+
+    //     db.Passwords.update({
+    //             id: passwordId,
+    //             description: req.body.description,
+    //             userName: req.body.userName,
+    //             password: req.body.password
+    //         }
+    //         , {
+    //             where: {
+    //                 id: passwordId 
+    //             }
+    //         }
+
+    //     ).then((dbResults) => {
+
+    //         let route = `/portal/${req.body.passId}`;
+    //         res.redirect(route);
+
+    //     }).catch((err) => {
+    //         res.status(406).json({
+    //             message: 'something blew up ',
+    //             error: err
+    //         });
+    //     });
+    // });
+
+
     app.put("/api/passwords/", (req, res) => {
         // console.log(req);
-        let passwordId = req.body.id;
-
         db.Passwords.update({
-                id: passwordId,
-                description: req.body.description,
-                userName: req.body.userName,
-                password: req.body.password
+            description: req.body.description,
+            userName: req.body.userName,
+            password: req.body.password
+        }, {
+            where: {
+                id: req.body.passId
             }
-            , {
-                where: {
-                    id: passwordId 
-                }
-            }
-
-        ).then((dbResults) => {
-
+        }).then((dbResults) => {
             let route = `/portal/${req.body.passId}`;
             res.redirect(route);
-
         }).catch((err) => {
             res.status(406).json({
                 message: 'something blew up ',
@@ -118,21 +140,38 @@ module.exports = function (app) {
 
     // DELETE
     // =============================================================
-    app.delete("/api/passwords/:id", (req, res) => {
+    // app.delete("/api/passwords/:id", (req, res) => {
 
-        var paramsId = req.params.id
-        // console.log(paramsId);
+    //     var paramsId = req.params.id
+    //     // console.log(paramsId);
+
+    //     db.Passwords.destroy({
+    //         where: {
+    //             id: paramsId
+    //         }
+
+    //     }).then(() => {
+
+    //         let route = `/portal/${req.params.id}`;
+    //         res.redirect(route);
+
+    //     }).catch((err) => {
+    //         res.status(406).json({
+    //             message: 'something blew up ',
+    //             error: err
+    //         });
+    //     });
+    // });
+
+    app.delete("/api/passwords/:id", (req, res) => {
 
         db.Passwords.destroy({
             where: {
-                id: paramsId
+                id: req.params.id
             }
-
         }).then(() => {
-
             let route = `/portal/${req.params.id}`;
             res.redirect(route);
-
         }).catch((err) => {
             res.status(406).json({
                 message: 'something blew up ',
@@ -140,6 +179,7 @@ module.exports = function (app) {
             });
         });
     });
+};
 
 
 };
