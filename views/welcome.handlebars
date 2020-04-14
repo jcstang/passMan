@@ -21,19 +21,19 @@
 
 {{!-- jacob code --}}
 <div class="container h-100 d-flex justify-content-center">
-    <div class="card shadow my-auto">
+    <div class="card shadow my-auto text-dark" id="welcome-card">
 
         <div class="card-header"><img class="header-image mb-3" src="./img/passman.svg" alt="">
 
 
             <form action="/login" method="POST">
                 <div class="form-group" action="/login" method="POST">
-                    <label for="userNameLogin" class="font-weight-bold">E-<i class="fas fa-mars"></i></label>
-                    <input type="email" class="form-control" id="userName" name="loginusername">
+                    <label for="userNameLogin" class="font-weight-bold">E - <i class="fas fa-mars" id="mars-symbol"></i></label>
+                    <input type="email" class="form-control transparent-input" id="userName" name="loginusername">
                 </div>
                 <div class="form-group">
                     <label for="passwordLogin" class="font-weight-bold">Password</label>
-                    <input type="password" class="form-control" id="password" name="loginpassword">
+                    <input type="password" class="form-control transparent-input" id="password" name="loginpassword">
                 </div>
                 <a href="" data-toggle="modal" data-target="#registerModal" class="font-weight-bold float-left ">Register
                     Here </a>
@@ -50,10 +50,10 @@
 {{!-- Register Form That Pops up --}}
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="formModalTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="formModalTitle">Create a new Account</h5>
+    <div class="modal-dialog modal-dialog-centered text-dark font-weight-bold" role="document">
+        <div class="modal-content reg-modal">
+            <div class="modal-header reg-modal-header">
+                <h5 class="modal-title font-weight-bold" id="formModalTitle">Create a new Account</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -64,27 +64,27 @@
                     oninput='up2.setCustomValidity(up2.value != up.value ? "Passwords do not match." : "")'>
                     <div class="form-group">
                         <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" id="firstName" name="firstname" required>
+                        <input type="text" class="form-control transparent-input" id="firstName" name="firstname" required>
                     </div>
                     <div class="form-group">
                         <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" name="lastname" required>
+                        <input type="text" class="form-control transparent-input" id="lastName" name="lastname" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="JohnD'OH@yourmail.com" name="username" required>
+                        <input type="email" class="form-control transparent-input" id="email" placeholder="JohnD'OH@yourmail.com" name="username" required>
                     </div>
                     <div class="form-group">
                         <label for="passwordThing1">Password</label>
-                        <input type="password" class="form-control" id="passwordThing1" placeholder="password1234" name="userpassword" required>
+                        <input type="password" class="form-control transparent-input" id="passwordThing1" placeholder="password1234" name="userpassword" required>
                     </div>
                     <div class="form-group">
                         <label for="passwordThing2">Confirm Password</label>
-                        <input type="password" class="form-control" id="passwordThing2" placeholder="password1234" name="userpassword2" required>
+                        <input type="password" class="form-control transparent-input" id="passwordThing2" placeholder="password1234" name="userpassword2" required>
                     </div>
 
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Create Account</button>
+                    <div class="modal-footer reg-modal-footer">
+                        <button type="submit" class="btn btn-primary font-weight-bold">Create Account</button>
                     </div>
                 </form>
             </div>
