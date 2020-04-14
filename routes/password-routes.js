@@ -89,15 +89,17 @@ module.exports = function (app) {
     // =============================================================
     app.put("/api/passwords/", (req, res) => {
         // console.log(req);
-
+        let passwordId = req.body.id;
 
         db.Passwords.update({
+                id: passwordId,
                 description: req.body.description,
                 userName: req.body.userName,
                 password: req.body.password
-            }, {
+            }
+            , {
                 where: {
-                    id: req.body.passId
+                    id: passwordId 
                 }
             }
 
