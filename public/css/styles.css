@@ -1,11 +1,58 @@
 /* Style.css - for all pages */
-.header-image{
+#header-image{
     height: 100px;
 }
 .navbar{
-    background-image: url(/public/img/purty_wood_@2X.png);
+    background-image: url(/img/purty_wood_@2X.png);
 }
 
 html, body {
     height: 100%;
+    background-color: rgb(134, 147, 153);
+}
+
+#mars-symbol{
+    font-size: 20px;
+    font-weight: bolder;
+}
+#welcome-card{
+    background-image: url(/img/purty_wood_@2X.png);
+    border-radius: 20px !important;
+}
+input.transparent-input{
+    background-color:rgba(255, 255, 255, 0.5) !important;
+    border:none !important;
+ }
+ button.btn-primary{
+    background-color: rgb(125, 150, 161) !important;
+    border:  rgb(125, 150, 161) !important;
+ }
+ .pass-card,
+ #edit-btn{
+    background-color: rgb(216, 227, 231) !important;
+    border:  rgb(125, 150, 161) !important;
+ }
+ .pass-drop{
+    border:  rgb(125, 150, 161) !important;
+ }
+ .main-pass-card{
+    border: 1px solid rgb(172, 180, 184) !important;
+    border-radius: 20px;
+ }
+ .add-modal,
+ .edit-modal,
+ .reg-modal{
+    background-image: url(/img/purty_wood_@2X.png);
+    border-radius: 20px !important;
+    
+}
+.add-modal-header,
+.edit-modal-header,
+.reg-modal-header{
+    border-bottom: 1px solid rgb(128, 128, 128) !important;
+}
+.add-modal-footer,
+.edit-modal-footer,
+.reg-modal-footer{
+    border-top: 1px solid rgb(128, 128, 128) !important;
 }

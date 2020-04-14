@@ -96,8 +96,11 @@ module.exports = function (app) {
                 description: req.body.description,
                 userName: req.body.userName,
                 password: req.body.password
+            },
+            {
+                where: req.body.id,
             }
-            // {returning: true, where: { id: req.body.passId}}
+            
             ).then((dbPassword) => {
             res.json(dbPassword);
         }).catch()(() => {
