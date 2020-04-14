@@ -27,3 +27,11 @@ describe('isANumber func', () => {
     });
 
 });
+
+describe('createPasswordObject', () => {
+    it('it should be awesome when called', (done) => {
+        let iBoolean = true;
+        expect(iBoolean).to.be.true;
+        done();
+    });
+});

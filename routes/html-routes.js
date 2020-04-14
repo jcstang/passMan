@@ -38,18 +38,18 @@ module.exports = function (app) {
                 id: ownerKey
             }
         }).then((dbUser) => {
-            console.log(dbUser);
+            // console.log(dbUser);
 
             db.Passwords.findAll({
                 //** conditional would go here **
             }).then(function(dbPasswords) {
-                console.log('========================================= thing1');
+                // console.log('========================================= thing1');
                 let passwordObjectReadyForHandlebars = helper.createPasswordObject(dbPasswords, dbUser);
-                console.log(passwordObjectReadyForHandlebars);
+                // console.log(passwordObjectReadyForHandlebars);
                 res.render("index", passwordObjectReadyForHandlebars);
 
             }).catch((err) => {
-                console.log('========================================= thing2');
+                // console.log('========================================= thing2');
                 res.end(err);
             });
         })
@@ -69,9 +69,9 @@ module.exports = function (app) {
         })
         .then((dbUser) => {
             // user is coming here!!!!!! yay!!!!!!
-            console.log('===============');
-            console.log(dbUser);
-            console.log(dbUser.password);
+            // console.log('===============');
+            // console.log(dbUser);
+            // console.log(dbUser.password);
 
             const passwordFromDB = dbUser.password;
             const passwordFromInput = req.body.loginpassword;
@@ -149,8 +149,8 @@ module.exports = function (app) {
 
     app.post('/signUp',(req, res) => {
         const passwordInput = req.body.userpassword;
-        console.log('##$%%$#@#$%$#');
-        console.log(passwordInput);
+        // console.log('##$%%$#@#$%$#');
+        // console.log(passwordInput);
 
         bcrypt.genSalt(saltRounds, function(err, salt) {
             bcrypt.hash(passwordInput, salt, function(err, hash) {
@@ -168,8 +168,6 @@ module.exports = function (app) {
                     db.User.create(userReadyForSave)
                         .then((dbCreatedUser) => {
 
-                        // ============================================================
-                        // TODO: Pass the passwords here instead of dbResults. how do we get passwords?
                         res.status(201).render("welcome", dbCreatedUser);
             
                     })

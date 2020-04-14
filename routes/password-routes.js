@@ -2,7 +2,7 @@
 // password-routes.js
 // ***************************************************************************
 let db = require("../models");
-const helper = require("../helperFuncs");
+// const helper = require("../helperFuncs");
 
 
 module.exports = function (app) {
@@ -20,7 +20,7 @@ module.exports = function (app) {
                 // See below
                 //TIM will attempt to work on this one
 
-                
+
             });
     });
 
@@ -89,48 +89,45 @@ module.exports = function (app) {
     // =============================================================
     app.put("/api/passwords/", (req, res) => {
         // console.log(req);
-        
 
-        db.Passwords.update(
-            {
+
+        db.Passwords.update({
                 description: req.body.description,
                 userName: req.body.userName,
                 password: req.body.password
-            },
-            {
-                where: {id: req.body.passId}
+            }, {
+                where: {
+                    id: req.body.passId
+                }
             }
-            
-            ).then((dbResults) => {
-               
-                let route = `/portal/${req.body.passId}`;
-                res.redirect(route);
 
-            }).catch((err) => {
-                res.status(406).json({
-                    message: 'something blew up ',
-                    error: err
-                });
+        ).then((dbResults) => {
+
+            let route = `/portal/${req.body.passId}`;
+            res.redirect(route);
+
+        }).catch((err) => {
+            res.status(406).json({
+                message: 'something blew up ',
+                error: err
             });
+        });
     });
 
     // DELETE
     // =============================================================
     app.delete("/api/passwords/:id", (req, res) => {
-        
+
         var paramsId = req.params.id
-        console.log(paramsId);
-        
+        // console.log(paramsId);
+
         db.Passwords.destroy({
-            where:{
-                id: req.params.id
-            } 
-                
-            
-            
-            
+            where: {
+                id: paramsId
+            }
+
         }).then(() => {
-               
+
             let route = `/portal/${req.params.id}`;
             res.redirect(route);
 
