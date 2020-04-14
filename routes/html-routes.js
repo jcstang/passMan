@@ -13,10 +13,11 @@ module.exports = function (app) {
     // GET REQUESTS
     // =============================================================
     app.get('/', (req, res) => {
-        res.end('no.... nice try.');
+        // res.end('no.... nice try.');
         // go get passwords
         // render index
         // what about the user?
+        res.redirect('/welcome');
     });
 
     // path just used to fill db with test data.
@@ -31,7 +32,7 @@ module.exports = function (app) {
     app.get('/portal/:id', (req, res) => {
         // get passwords ownerKey
         let ownerKey = req.params.id;
-        console.log('req.params.id: ' + ownerKey);
+        // console.log('req.params.id: ' + ownerKey);
         db.User.findOne({
             where: {
                 // user_name: ownerKey
@@ -39,10 +40,12 @@ module.exports = function (app) {
             }
         }).then((dbUser) => {
             // console.log(dbUser);
-
+            
             db.Passwords.findAll({
                 //** conditional would go here **
+                where: {ownerKey: ownerKey}
             }).then(function(dbPasswords) {
+                // console.log(dbPasswords);
                 // console.log('========================================= thing1');
                 let passwordObjectReadyForHandlebars = helper.createPasswordObject(dbPasswords, dbUser);
                 // console.log(passwordObjectReadyForHandlebars);
@@ -83,7 +86,7 @@ module.exports = function (app) {
                 // result == true
                 if(err) {
                     //do stuff
-                    // res.redirect('/welcome');
+                    res.redirect('/welcome');
                 }
 
                 if(result === true) {
@@ -92,6 +95,9 @@ module.exports = function (app) {
                     // ***********************************************************
                     db.Passwords.findAll({
                         //** conditional would go here **
+                        where: {
+                            ownerKey: dbUser.id
+                        }
                     }).then(function(dbPasswords) {
                         let passwordObjectReadyForHandlebars = helper.createPasswordObject(dbPasswords, dbUser);
 
