@@ -56,3 +56,6 @@ input.transparent-input{
 .reg-modal-footer{
     border-top: 1px solid rgb(128, 128, 128) !important;
 }
+.delete-button{
+    float: left !important;
+}

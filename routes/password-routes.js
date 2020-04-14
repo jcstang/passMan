@@ -70,7 +70,7 @@ module.exports = function (app) {
             // res.redirect("/portal/1");
             // let hashedKey = 'sa;fkjsfkl;dajfsl;jsd'
             let route = `/portal/${req.body.ownerKey}`;
-            console.log(route);
+            // console.log(route);
             res.redirect(route);
 
             // res.redirect('/portal/1');
@@ -87,8 +87,8 @@ module.exports = function (app) {
 
     // PUT
     // =============================================================
-    app.put("/api/passwords", (req, res) => {
-        console.log(req);
+    app.put("/api/passwords/delete", (req, res) => {
+        // console.log(req);
         
 
         db.Passwords.update(
@@ -101,46 +101,43 @@ module.exports = function (app) {
                 where: {id: req.body.passId}
             }
             
-            )
-            .then(function (dbPassword) {
-                res.json(dbPassword);
-                // TODO: handlebars ready
-                // TODO: res.render stuff
-                // TODO: also pass it handlebars formatted data from dbPassword
-                // See below
-                //TIM will attempt to work on this one
+            ).then((dbResults) => {
+               
+                let route = `/portal/${req.body.passId}`;
+                res.redirect(route);
 
-                
+            }).catch((err) => {
+                res.status(406).json({
+                    message: 'something blew up ',
+                    error: err
+                });
             });
-        //     .then((dbPassword) => {
-        //     res.json(dbPassword);
-        // }).catch()(() => {
-        //     res.status(500).send({
-        //         error: "idk, something blew up"
-        //     });
-        // });
     });
 
     // DELETE
     // =============================================================
     app.delete("/api/passwords/:id", (req, res) => {
+        
+        var paramsId = req.params.id
+        console.log(paramsId);
+        
         db.Passwords.destroy({
-            where: {
+            where:{
                 id: req.params.id
-            }
-        }).then((isSuccess) => {
-            if (isSuccess) {
-                res.status(202).send({
-                    message: "success"
-                });
-            } else {
-                res.status(404).send({
-                    message: "cannot do... no findy wut you needy."
-                });
-            }
-        }).catch(() => {
-            res.status(500).send({
-                error: "idk, something blew up"
+            } 
+                
+            
+            
+            
+        }).then(() => {
+               
+            let route = `/portal/${req.params.id}`;
+            res.redirect(route);
+
+        }).catch((err) => {
+            res.status(406).json({
+                message: 'something blew up ',
+                error: err
             });
         });
     });
