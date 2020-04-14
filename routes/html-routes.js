@@ -13,10 +13,11 @@ module.exports = function (app) {
     // GET REQUESTS
     // =============================================================
     app.get('/', (req, res) => {
-        res.end('no.... nice try.');
+        // res.end('no.... nice try.');
         // go get passwords
         // render index
         // what about the user?
+        res.redirect('/welcome');
     });
 
     // path just used to fill db with test data.
