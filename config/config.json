@@ -1,10 +1,10 @@
 {
     "development": {
         "username": "root",
-        "password": "",
+        "password": "root",
         "database": "passMan",
         "host": "localhost",
-        "port": 3306,
+        "port": 8899,
         "dialect": "mysql"
     },
     "test": {
@@ -16,10 +16,10 @@
         "dialect": "mysql"
     },
     "production": {
-        "username": "root",
-        "password": "root",
-        "database": "passMan",
-        "host": "127.0.0.1",
+        "username": "omn6xrk9eywycl6u",
+        "password": "i7ikm0flrc8myw9m",
+        "database": "ypdov0g6ylogjxrt",
+        "host": "s554ongw9quh1xjs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
         "port": 3306,
         "dialect": "mysql"
     }

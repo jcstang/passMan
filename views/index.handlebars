@@ -113,27 +113,28 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="/api/passwords?_method=PUT" method="post" enctype="application/x-www-form-urlencoded">
+              {{!-- <form action="/api/passwords?_method=PUT" method="post" enctype="application/x-www-form-urlencoded"> --}}
+              <form>
                 <div class="form-group">
                   <label for="siteName">Site Name</label>
                   <input type="hidden"  id="input0" name="passId" value="{{id}}">
-                  <input type="text" class="form-control transparent-input" id="input1" name="description" value="{{description}}">
+                  <input type="text" class="form-control transparent-input" id="desc-id" name="description" value="{{description}}">
                 </div>
                 <div class="form-group">
                   <label for="username">Username</label>
-                  <input type="text" class="form-control transparent-input" id="input2" name="userName" value="{{username}}">
+                  <input type="text" class="form-control transparent-input" id="username-id" name="userName" value="{{username}}">
                 </div>
                 <div class="form-group">
                   <label for="password">password</label>
-                  <input type="text" class="form-control transparent-input" id="input3" name="password" value="{{password}}">
+                  <input type="text" class="form-control transparent-input" id="password-id" name="password" value="{{password}}">
                 </div>
               <input type="hidden" name="_method" value="PUT">
             </div>
             <div class="modal-footer edit-modal-footer justify-content-between">
-              <button type="submit" class="btn btn-primary">Update</button>
+              <button class="btn btn-primary" id="updateButton" data-id="{{id}}">Update</button>
               
               </form>
-              <form action="/api/passwords/{{id}}?_method=DELETE" method="POST" ><input type="hidden" value="{{id}}"><input type="hidden" name="_method" value="DELETE"><button type="submit" class="btn btn-danger">Remove</button></form>
+              {{!-- <form action="/api/passwords/{{id}}?_method=DELETE" method="POST" ><input type="hidden" value="{{id}}"><input type="hidden" name="_method" value="DELETE"><button type="submit" class="btn btn-danger">Remove</button></form> --}}
             </div>
           </div>
         </div>
