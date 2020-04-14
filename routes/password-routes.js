@@ -179,7 +179,6 @@ module.exports = function (app) {
             });
         });
     });
-};
 
 
 };
