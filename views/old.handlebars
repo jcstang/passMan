@@ -114,12 +114,11 @@
             </div>
             <div class="modal-body">
               <form action="/api/passwords?_method=PUT" method="post" enctype="application/x-www-form-urlencoded">
-              {{!-- <form> --}}
+              <form>
                 <div class="form-group">
                   <label for="siteName">Site Name</label>
                   <input type="hidden"  id="input0" name="passId" value="{{id}}">
-                  <input type="hidden"  id="input0" name="ownerKey" value="{{ownerKey}}">
-                  <input type="text" class="form-control transparent-input" id="input1" name="description" value="{{description}}">
+                  <input type="text" class="form-control transparent-input" id="desc-id" name="description" value="{{description}}">
                 </div>
                 <div class="form-group">
                   <label for="username">Username</label>
@@ -131,11 +130,11 @@
                 </div>
               <input type="hidden" name="_method" value="PUT">
             </div>
-            <div class="modal-footer edit-modal-footer flex-row-reverse justify-content-between">
-              <button type="submit" class="btn btn-primary">Update</button>
+            <div class="modal-footer edit-modal-footer justify-content-between flex-row-reverse">
+              <button class="btn btn-primary" id="updateButton" data-id="{{id}}">Update</button>
               
               </form>
-              <form action="/api/passwords/{{id}}?_method=DELETE" method="POST" ><input type="hidden" name="ownerKey" value="{{ownerKey}}"><input type="hidden" name="_method" value="DELETE"><button type="submit" class="btn btn-danger">Remove</button></form>
+              <form action="/api/passwords/{{id}}?_method=DELETE" method="POST" ><input type="hidden" value="{{id}}"><input type="hidden" name="_method" value="DELETE"><button type="submit" class="btn btn-danger">Remove</button></form>
             </div>
           </div>
         </div>

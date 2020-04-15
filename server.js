@@ -5,7 +5,7 @@
 const path = require('path');
 const express = require("express");
 const debug = require("debug")('server');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const methodOverride = require('method-override');
@@ -15,9 +15,11 @@ const methodOverride = require('method-override');
 const app = express();
 const PORT = process.env.PORT || 8181;
 
-// TODO: implement PASSPORT.JS
-// TODO: come up with more todos for that
-// Jacob S. is working on this currently. 
+// PHASE 2
+// 1. more types of things to save. dates. text.
+// 2. implement passport js.
+
+// WORKING on deploying this master branch
 
 
 // brings in database models
@@ -28,7 +30,7 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.use(express.json());
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session({
     secret: 'new new york'
@@ -57,8 +59,6 @@ app.set("view engine", "handlebars");
 
 //Below is a link for partials setup
 //https://stackoverflow.com/questions/16385173/node-js-express-handlebars-js-partial-views
-
-
 
 // Syncing our sequelize models and then starting our express app
 // =============================================================

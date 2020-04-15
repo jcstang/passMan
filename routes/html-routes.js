@@ -13,10 +13,15 @@ module.exports = function (app) {
     // GET REQUESTS
     // =============================================================
     app.get('/', (req, res) => {
-        res.end('no.... nice try.');
+        // res.end('no.... nice try.');
         // go get passwords
         // render index
         // what about the user?
+        res.redirect('/welcome');
+    });
+
+    app.get("login", (req, res) => {
+        res.end('hi');
     });
 
     // path just used to fill db with test data.
@@ -31,25 +36,27 @@ module.exports = function (app) {
     app.get('/portal/:id', (req, res) => {
         // get passwords ownerKey
         let ownerKey = req.params.id;
-        console.log('req.params.id: ' + ownerKey);
+        // console.log('req.params.id: ' + ownerKey);
         db.User.findOne({
             where: {
                 // user_name: ownerKey
                 id: ownerKey
             }
         }).then((dbUser) => {
-            console.log(dbUser);
-
+            // console.log(dbUser);
+            
             db.Passwords.findAll({
                 //** conditional would go here **
+                where: {ownerKey: ownerKey}
             }).then(function(dbPasswords) {
-                console.log('========================================= thing1');
+                // console.log(dbPasswords);
+                // console.log('========================================= thing1');
                 let passwordObjectReadyForHandlebars = helper.createPasswordObject(dbPasswords, dbUser);
-                console.log(passwordObjectReadyForHandlebars);
+                // console.log(passwordObjectReadyForHandlebars);
                 res.render("index", passwordObjectReadyForHandlebars);
 
             }).catch((err) => {
-                console.log('========================================= thing2');
+                // console.log('========================================= thing2');
                 res.end(err);
             });
         })
@@ -69,9 +76,9 @@ module.exports = function (app) {
         })
         .then((dbUser) => {
             // user is coming here!!!!!! yay!!!!!!
-            console.log('===============');
-            console.log(dbUser);
-            console.log(dbUser.password);
+            // console.log('===============');
+            // console.log(dbUser);
+            // console.log(dbUser.password);
 
             const passwordFromDB = dbUser.password;
             const passwordFromInput = req.body.loginpassword;
@@ -83,7 +90,7 @@ module.exports = function (app) {
                 // result == true
                 if(err) {
                     //do stuff
-                    // res.redirect('/welcome');
+                    res.redirect('/welcome');
                 }
 
                 if(result === true) {
@@ -92,6 +99,9 @@ module.exports = function (app) {
                     // ***********************************************************
                     db.Passwords.findAll({
                         //** conditional would go here **
+                        where: {
+                            ownerKey: dbUser.id
+                        }
                     }).then(function(dbPasswords) {
                         let passwordObjectReadyForHandlebars = helper.createPasswordObject(dbPasswords, dbUser);
 
@@ -103,8 +113,8 @@ module.exports = function (app) {
 
                 } else {
                     //no go bro
-                    // res.redirect('/welcome');
-                    res.end('hash didnt work??');
+                    res.redirect('/welcome');
+                    // res.end('hash didnt work??');
                 }
 
             });
@@ -149,8 +159,8 @@ module.exports = function (app) {
 
     app.post('/signUp',(req, res) => {
         const passwordInput = req.body.userpassword;
-        console.log('##$%%$#@#$%$#');
-        console.log(passwordInput);
+        // console.log('##$%%$#@#$%$#');
+        // console.log(passwordInput);
 
         bcrypt.genSalt(saltRounds, function(err, salt) {
             bcrypt.hash(passwordInput, salt, function(err, hash) {
@@ -168,8 +178,6 @@ module.exports = function (app) {
                     db.User.create(userReadyForSave)
                         .then((dbCreatedUser) => {
 
-                        // ============================================================
-                        // TODO: Pass the passwords here instead of dbResults. how do we get passwords?
                         res.status(201).render("welcome", dbCreatedUser);
             
                     })
@@ -186,6 +194,20 @@ module.exports = function (app) {
         });
         
 
+    });
+
+    // this route was created to prevent a get request to soemthing like:
+    // '/login?passId=1&description=facebook+after+edits+have+been+made+v5&userName=bill%40gmail.com&password=password445566&_method=PUT'
+    // which leads to a 'CANNOT /GET'
+    // =============================================================
+    app.get("/login?*", (req, res) => {
+        console.log(req);
+        console.log('=================================');
+        // res.end('end of the road.');
+        // ***************************************************************************
+        // flawed logic here. we are redirecting to /portal/passWordId instead of /porta/userId
+        // ***************************************************************************
+        res.redirect(`/portal/${req.query.passId}`);
     });
 
 

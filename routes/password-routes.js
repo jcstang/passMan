@@ -2,7 +2,7 @@
 // password-routes.js
 // ***************************************************************************
 let db = require("../models");
-const helper = require("../helperFuncs");
+// const helper = require("../helperFuncs");
 
 
 module.exports = function (app) {
@@ -20,7 +20,7 @@ module.exports = function (app) {
                 // See below
                 //TIM will attempt to work on this one
 
-                
+
             });
     });
 
@@ -87,6 +87,36 @@ module.exports = function (app) {
 
     // PUT
     // =============================================================
+    // app.put("/api/passwords/", (req, res) => {
+    //     // console.log(req);
+    //     let passwordId = req.body.id;
+
+    //     db.Passwords.update({
+    //             id: passwordId,
+    //             description: req.body.description,
+    //             userName: req.body.userName,
+    //             password: req.body.password
+    //         }
+    //         , {
+    //             where: {
+    //                 id: passwordId 
+    //             }
+    //         }
+
+    //     ).then((dbResults) => {
+
+    //         let route = `/portal/${req.body.passId}`;
+    //         res.redirect(route);
+
+    //     }).catch((err) => {
+    //         res.status(406).json({
+    //             message: 'something blew up ',
+    //             error: err
+    //         });
+    //     });
+    // });
+
+
     app.put("/api/passwords/", (req, res) => {
         console.log(req.body);
         
@@ -112,10 +142,34 @@ module.exports = function (app) {
                     error: err
                 });
             });
+        });
     });
 
     // DELETE
     // =============================================================
+    // app.delete("/api/passwords/:id", (req, res) => {
+
+    //     var paramsId = req.params.id
+    //     // console.log(paramsId);
+
+    //     db.Passwords.destroy({
+    //         where: {
+    //             id: paramsId
+    //         }
+
+    //     }).then(() => {
+
+    //         let route = `/portal/${req.params.id}`;
+    //         res.redirect(route);
+
+    //     }).catch((err) => {
+    //         res.status(406).json({
+    //             message: 'something blew up ',
+    //             error: err
+    //         });
+    //     });
+    // });
+
     app.delete("/api/passwords/:id", (req, res) => {
         console.log(req.body);
         
@@ -125,16 +179,24 @@ module.exports = function (app) {
         db.Passwords.destroy({
             where:{
                 id: req.params.id
-            } 
-                
-            
-            
+            }
+        }).then((dbPassword) => {
+            console.log('==========================================================');
             
         }).then(() => {
                
             let route = `/portal/${req.body.ownerKey}`;
             res.redirect(route);
 
+        db.Passwords.destroy({
+            where: {
+                id: req.params.id
+            }
+        }).then((dbPassword) => {
+
+            let route = `/portal/${userId}`;
+            res.redirect(route);
+            // res.end('i am done.');
         }).catch((err) => {
             res.status(406).json({
                 message: 'something blew up ',

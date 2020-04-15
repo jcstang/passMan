@@ -5,13 +5,13 @@ function isANumber(value) {
 }
 
 function createPasswordObject(passwordObject, userObject) {
-    console.log('========================================= thing3');
-    console.log(passwordObject);
-    console.log(userObject);
+    // console.log('========================================= thing3');
+    // console.log(passwordObject);
+    // console.log(userObject);
     
     let passPasswords = [];
     passwordObject.forEach(element => {
-        console.log('========================================= thing3a');
+        // console.log('========================================= thing3a');
         passPasswords.push({
             id: element.id,
             description: element.description,
@@ -19,7 +19,7 @@ function createPasswordObject(passwordObject, userObject) {
             password: element.password,
             ownerKey: element.ownerKey
         });
-        console.log('========================================= thing3b');
+        // console.log('========================================= thing3b');
     });
     
     // DATA passing is working. I just refrenced {{username}} and handlebars picked it up
@@ -28,7 +28,7 @@ function createPasswordObject(passwordObject, userObject) {
         theusername: userObject.user_name,
         theId: userObject.id  // this is the logged in username NOT a saved username/password
     };
-    console.log('========================================= thing4');
+    // console.log('========================================= thing4');
     return finishedObject;
 }
 
