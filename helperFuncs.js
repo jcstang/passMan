@@ -16,7 +16,8 @@ function createPasswordObject(passwordObject, userObject) {
             id: element.id,
             description: element.description,
             username: element.userName,
-            password: element.password
+            password: element.password,
+            ownerKey: element.ownerKey
         });
         console.log('========================================= thing3b');
     });

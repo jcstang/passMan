@@ -88,7 +88,7 @@ module.exports = function (app) {
     // PUT
     // =============================================================
     app.put("/api/passwords/", (req, res) => {
-        // console.log(req);
+        console.log(req.body);
         
 
         db.Passwords.update(
@@ -103,7 +103,7 @@ module.exports = function (app) {
             
             ).then((dbResults) => {
                
-                let route = `/portal/${req.body.passId}`;
+                let route = `/portal/${req.body.ownerKey}`;
                 res.redirect(route);
 
             }).catch((err) => {
@@ -117,6 +117,7 @@ module.exports = function (app) {
     // DELETE
     // =============================================================
     app.delete("/api/passwords/:id", (req, res) => {
+        console.log(req.body);
         
         var paramsId = req.params.id
         console.log(paramsId);
@@ -131,7 +132,7 @@ module.exports = function (app) {
             
         }).then(() => {
                
-            let route = `/portal/${req.params.id}`;
+            let route = `/portal/${req.body.ownerKey}`;
             res.redirect(route);
 
         }).catch((err) => {
