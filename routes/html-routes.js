@@ -2,7 +2,7 @@
 // html-routes.js - file conians routes to guide users to html pages
 // ***************************************************************************
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const saltRounds = 15;
 const path = require('path');
 const helper = require('../helperFuncs');
 // brings in database models
