@@ -26,14 +26,3 @@ Password manager, that lets you login or signup and manage your passwords.
 
 ![screenshot](public/img/app-auth-flow.png)
 
-## trying to replicate a great example below
-
-![stronghold logo](img/stronghold+logo+left.png)
-
-[![Downloads](http://pepy.tech/badge/stronghold)](http://pepy.tech/count/stronghold)
-
-`stronghold` is the easiest way to securely configure your Mac.
-
-![GIF demo](img/demo.gif)
-
-Designed for macOS Sierra and High Sierra. +Not yet tested on macOS Mojave, but I'm working on updating it!+
